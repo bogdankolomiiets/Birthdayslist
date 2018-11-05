@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Список дней рождений</string>
+    <string name="title_activity_new_birthday">Новый день рожденья</string>
+    <string name="btnCancel_text">Закрыть</string>
+    <string name="btnOK_text">Добавить</string>
+    <string name="Birthday">День рождения</string>
+    <string name="Name">Имя</string>
+    <string name="Added">День рожденья сохранено успешно</string>
+    <string name="NoAdded">Что-то пошло не так. День рождения не добавлено в базу</string>
+    <string name="aboutTheProgram">Это моя первая программа на языке программирования Java для Android. Программа позволяет Вам создать список дней рождения и напомнить Вам о них.</string>
+    <string name="txtForTvEmail">Моя электронная почта: bogdan.kolomiiets@gmail.com</string>
+    <string name="Anniversary">Годовщина</string>
+    <string name="Another">Другое</string>
+    <string name="txtType">"Тип "</string>
+    <string name="BirthdayDate">Укажите дату праздника</string>
+    <string name="PersonName">Имя (можно полностью)</string>
+    <string name="aboutMenuItem">О программе</string>
+    <string name="noSelectContact">Контакт не выбран</string>
+    <string name="delete">Удалить</string>
+    <string name="noData">Нет данных для отображения</string>
+    <string name="headerForContextMenu">Выберите действие</string>
+    <string name="change">Изменить</string>
+    <string name="noInserted">Ошибка, не добавлено в базу.</string>
+    <string name="insertedSuccessful">Новая дата УСПЕШНО добавлена</string>
+    <string name="settingsMenuItem">Настройки</string>
+    <string name="PhoneNumber">Номер телефона (не обязательно)</string>
+    <string name="Error">Ошибка</string>
+    <string name="Negative">Нет</string>
+    <string name="Positive">Да</string>
+    <string name="Question">Вы уверены?</string>
+    <string name="Save">Сохранить</string>
+    <string name="Cancel">Отмена</string>
+    <string name="reallyDelete">Удалить дату для</string>
+    <string name="deleted">Дата удалена</string>
+    <string name="notDeleted">Ошибка! Дата не удалена</string>
+    <string name="updated">Данные обновились успешно</string>
+    <string name="notUpdated">Ошибка! Данные не обновились</string>
+    <string name="birthdaysToday">Сегодня празднует</string>
+</resources>

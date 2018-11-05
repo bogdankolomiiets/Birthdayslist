@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Birthdays list</string>
+    <string name="title_activity_new_birthday">New Birthday</string>
+    <string name="btnOK_text">Add</string>
+    <string name="btnCancel_text">Close</string>
+    <string name="Birthday">Birthday</string>
+    <string name="Name">Person Name</string>
+    <string name="Added">Birthday added successfully</string>
+    <string name="NoAdded">Something went wrong. Data not added to base</string>
+    <string name="PersonName">Name</string>
+    <string name="Error">Error</string>
+    <string name="BirthdayDate">Date of Birthday</string>
+    <string name="PhoneNumber">Phone number (optional)</string>
+    <string name="aboutMenuItem">About</string>
+    <string name="settingsMenuItem">Settings</string>
+    <string name="txtType">Type of celebration</string>
+    <string name="Anniversary">Anniversary</string>
+    <string name="Another">Another</string>
+    <string name="aboutTheProgram">This is my first program in Java programming language for android. The program allows you to create a list of birthdays and remind you of them.</string>
+    <string name="txtForTvEmail">My email: bogdan.kolomiiets@gmail.com</string>
+    <string name="noSelectContact">You did\'t select a contact</string>
+    <string name="insertedSuccessful">New data inserted successful</string>
+    <string name="noInserted">Error! No inserted</string>
+    <string name="change">Change</string>
+    <string name="delete">Delete</string>
+    <string name="headerForContextMenu">Select an action</string>
+    <string name="noData">Nothing to show</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Save">Save</string>
+    <string name="Question">Are you sure?</string>
+    <string name="Positive">YES</string>
+    <string name="Negative">NO</string>
+    <string name="reallyDelete">Delete the date for:</string>
+    <string name="deleted">Deleted successful</string>
+    <string name="notDeleted">Something went wrong. Not Deleted</string>
+    <string name="updated">Data updated successfully</string>
+    <string name="notUpdated">Something went wrong. Data not updated</string>
+    <string name="birthdaysToday">Birthday today</string>
+
+
+</resources>
