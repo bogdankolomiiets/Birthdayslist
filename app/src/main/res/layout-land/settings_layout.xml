@@ -10,7 +10,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/switchReminder" />
 
     <RadioGroup
@@ -48,12 +48,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioGroupDay"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/radioGroupDay"
         android:text="@string/ReminderTime"
         android:textAlignment="center"
         android:textSize="18sp" />
@@ -62,10 +62,13 @@
         android:id="@+id/reminderTimePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnReminderOK"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@+id/radioGroupDay"
         android:timePickerMode="spinner"/>
 
     <Button

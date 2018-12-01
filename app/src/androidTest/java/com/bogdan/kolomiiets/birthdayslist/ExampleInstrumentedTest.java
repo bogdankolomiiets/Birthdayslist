@@ -1,4 +1,4 @@
-package com.example.bogdan.birthdayslist;
+package com.bogdan.kolomiiets.birthdayslist;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

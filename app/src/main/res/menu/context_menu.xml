@@ -3,14 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/context_change"
-        android:icon="@drawable/ic_pencil"
         android:onClick="onContextChange"
         android:title="@string/change"
-        app:showAsAction="withText"/>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/context_delete"
-        android:icon="@drawable/ic_delete_outline"
         android:onClick="onContextDelete"
         android:title="@string/delete"
-        app:showAsAction="withText"/>
+        app:showAsAction="ifRoom"/>
 </menu>

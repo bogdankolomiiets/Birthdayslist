@@ -4,17 +4,26 @@
     <item
         android:id="@+id/settings"
         android:title="@string/settingsMenuItem"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         android:onClick="onSettingsMenuItem"
         android:icon="@drawable/ic_settings"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="collapseActionView"/>
 
     <item
         android:id="@+id/about"
-        android:title="@string/aboutMenuItem"
+        android:title="@string/aboutTheProgram"
         android:orderInCategory="3"
         android:onClick="onAboutMenuItem"
         android:icon="@drawable/ic_information"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_magnify"
+        android:orderInCategory="1"
+        android:title="@string/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom" />
+
 
 </menu>

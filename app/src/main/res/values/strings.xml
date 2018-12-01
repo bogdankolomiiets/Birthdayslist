@@ -11,13 +11,13 @@
     <string name="Error">Error</string>
     <string name="BirthdayDate">Date of Birthday</string>
     <string name="PhoneNumber">Phone number (optional)</string>
-    <string name="aboutMenuItem">About</string>
+    <string name="aboutTheProgram">About the program</string>
     <string name="settingsMenuItem">Settings</string>
     <string name="txtType">Type of celebration</string>
     <string name="Anniversary">Anniversary</string>
     <string name="Another">Another</string>
-    <string name="aboutTheProgram">This is my first program in Java programming language for android. The program allows you to create a list of birthdays and remind you of them.</string>
-    <string name="txtForTvEmail">My email: bogdan.kolomiiets@gmail.com</string>
+    <string name="aboutMessage">This is my first program in Java programming language for android. The program allows you to create a list of birthdays and remind you of them.</string>
+    <string name="txtEmail">Best regards:\nbogdan.kolomiiets@gmail.com</string>
     <string name="noSelectContact">You did\'t select a contact</string>
     <string name="insertedSuccessful">New data inserted successful</string>
     <string name="noInserted">Error! No inserted</string>
@@ -36,6 +36,18 @@
     <string name="updated">Data updated successfully</string>
     <string name="notUpdated">Something went wrong. Data not updated</string>
     <string name="birthdaysToday">Birthday today</string>
-
+    <string name="empty">Enter the name</string>
+    <string name="APP_ID" translatable="false">ca-app-pub-8123334718162410~4155812837</string>
+    <string name="bannerAdMob" translatable="false">ca-app-pub-8123334718162410/7021649320</string>
+    <string name="switchReminder">Enable reminder" "</string>
+    <string name="remindInSameDay">remind on the same day</string>
+    <string name="remindOneDays">remind the day before</string>
+    <string name="remindTwoDays">remind 2 days before</string>
+    <string name="ReminderTime">Reminder time:</string>
+    <string name="call">CALL</string>
+    <string name="sms">SEND SMS</string>
+    <string name="yearsOld">years old:</string>
+    <string name="search">Search</string>
+    <string name="Phone">Phone:</string>
 
 </resources>
