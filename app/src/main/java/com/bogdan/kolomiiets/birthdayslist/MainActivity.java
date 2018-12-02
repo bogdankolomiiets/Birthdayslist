@@ -1,8 +1,5 @@
 package com.bogdan.kolomiiets.birthdayslist;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,10 +28,9 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,14 +38,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SQLiteDBHelper dbHelper;
     private SQLiteDatabase db;
     private FloatingActionButton fab;
-    ConstraintLayout constraintLayout;
+    private ConstraintLayout constraintLayout;
     private ListView lv_dynamic;
     private TextView tv_id;
     private int mItemId = 0;
     private String mItemName = "";
     private String mItemPhone = "";
     private AdView mAdView;
+    public static InterstitialAd mInterstitialAd;
     private SharedPreferences preferences;
+    public static int countForAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +62,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
         lv_dynamic = (ListView) findViewById(R.id.lv_dynamic);
         tv_id = (TextView) findViewById(R.id.tv_id);
+        QueryToDB();
         mAdView = findViewById(R.id.adView);
         MobileAds.initialize(this, getResources().getString(R.string.APP_ID));
+
+        //BannerAd
         AdRequest adRequest = new AdRequest.Builder().build();
+        adRequest.isTestDevice(this);
         mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener(){
+
+        //InterstitialAd
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener(){
             @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                Toast.makeText(MainActivity.this, mAdView.isShown()+"", Toast.LENGTH_SHORT).show();
+            public void onAdOpened() {
+                countForAd = 0;
+            }
+
+            @Override
+            public void onAdClosed() {
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
         });
-        QueryToDB();
+
     }
 
     //Setup default sharedPreferences
@@ -87,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editor.putInt(SettingsActivity.CHECKED_RADIO, 0);
             editor.putInt(SettingsActivity.REMINDER_HOUR, 9);
             editor.putInt(SettingsActivity.REMINDER_MINUTE, 0);
-            editor.apply();
+            editor.commit();
 
             //Set alarm
             SetAlarm setAlarm = new SetAlarm();
@@ -174,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             db = dbHelper.getReadableDatabase();
             Cursor cursor = db.query(SQLiteDBHelper.TABLE_NAME, SQLiteDBHelper.COLUMNS_NAMES, null, null, null, null, null);
             ArrayList<DataForListView> list = new ArrayList<>();
-            Calendar current_date = Calendar.getInstance();
+            //Calendar current_date = Calendar.getInstance();
 
             if (cursor.getCount() == 0) {
                 TextView noData = new TextView(MainActivity.this);
@@ -260,9 +271,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()){
             case R.id.fab:
+                countForAd++;
+                if (countForAd > 7){
+                    if (mInterstitialAd.isLoaded()){
+                        mInterstitialAd.show();
+                    }
+                }
                 intent = new Intent(MainActivity.this, NewBirthdayActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.tvEmail:
                 intent = new Intent(Intent.ACTION_SENDTO);

@@ -93,12 +93,18 @@ public class NewBirthdayActivity extends AppCompatActivity {
                 txtPhone.setText("");
                 radioGroup.check(R.id.radioBirthday);
 
-                Toast.makeText(NewBirthdayActivity.this, R.string.insertedSuccessful, Toast.LENGTH_LONG).show();
+                Toast.makeText(NewBirthdayActivity.this, R.string.insertedSuccessful, Toast.LENGTH_SHORT).show();
+                MainActivity.countForAd++;
+                if (MainActivity.countForAd > 7){
+                    if (MainActivity.mInterstitialAd.isLoaded()){
+                        MainActivity.mInterstitialAd.show();
+                    }
+                }
             } catch (Exception e) {
                 Toast.makeText(NewBirthdayActivity.this, R.string.noInserted + "\n" + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(NewBirthdayActivity.this, R.string.empty, Toast.LENGTH_LONG).show();
+            Toast.makeText(NewBirthdayActivity.this, R.string.empty, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -116,8 +122,8 @@ public class NewBirthdayActivity extends AppCompatActivity {
         //Close database
         db.close();
         //Show MainActivity
-        Intent intent = new Intent(NewBirthdayActivity.this, MainActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(NewBirthdayActivity.this, MainActivity.class);
+        startActivity(intent);*/
         finish();
     }
 

@@ -120,7 +120,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         int minute = reminderTimePicker.getCurrentMinute();
         editor.putInt(REMINDER_HOUR, hour);
         editor.putInt(REMINDER_MINUTE, minute);
-        editor.apply();
+        editor.commit();
 
         //Set alarm
             SetAlarm setAlarm = new SetAlarm();

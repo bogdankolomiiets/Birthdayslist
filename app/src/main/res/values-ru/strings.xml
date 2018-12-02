@@ -36,6 +36,8 @@
     <string name="updated">Данные обновились успешно</string>
     <string name="notUpdated">Ошибка! Данные не обновились</string>
     <string name="birthdaysToday">Сегодня празднует</string>
+    <string name="birthdayTomorrow">Завтра праздник в</string>
+    <string name="birthdayAfterTomorrow">Послезавтра праздник в</string>
     <string name="empty">Имя не задано</string>
     <string name="aboutMessage">Это моя первая программа на языке программирования Java для Android. Программа позволяет Вам создать список дней рождения и напомнить Вам о них.</string>
     <string name="switchReminder">Включить напоминание</string>
@@ -47,5 +49,5 @@
     <string name="sms">СМС</string>
     <string name="yearsOld">Лет:</string>
     <string name="search">Поиск</string>
-    <string name="Phone">Телефон:</string>
+
 </resources>

@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
-
 import java.util.Calendar;
 
 public class SetAlarm {
@@ -27,7 +26,7 @@ public class SetAlarm {
                 calendar.setTimeInMillis(System.currentTimeMillis());
                 calendar.set(Calendar.HOUR_OF_DAY, hour);
                 calendar.set(Calendar.MINUTE, minute);
-                mAlarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), 5*60*1000, mPendingIntent);
+                mAlarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), 5*5000, mPendingIntent);
             }
         } catch (Exception e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
