@@ -14,9 +14,9 @@ public class SetAlarm {
 
     public void onAlarm(Context context, boolean alarmOn, int hour, int minute) {
         try {
-            mIntent = new Intent(context, BirthdayReceiver.class);
+            mIntent = new Intent(context, WhoCelebratingNotification.class);
             mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            mPendingIntent = PendingIntent.getBroadcast(context, RequestCodes.PENDING_INTENT_REQUEST_CODE, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            mPendingIntent = PendingIntent.getService(context, RequestCodes.PENDING_INTENT_REQUEST_CODE, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             if (!alarmOn) {
                 if (mAlarmManager != null) {
                     mAlarmManager.cancel(mPendingIntent);

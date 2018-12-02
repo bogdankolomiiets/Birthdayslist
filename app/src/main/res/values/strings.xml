@@ -51,5 +51,6 @@
     <string name="sms">SEND SMS</string>
     <string name="yearsOld">years old:</string>
     <string name="search">Search</string>
+    <string name="serviceName" translatable="false">Celebration service</string>
 
 </resources>

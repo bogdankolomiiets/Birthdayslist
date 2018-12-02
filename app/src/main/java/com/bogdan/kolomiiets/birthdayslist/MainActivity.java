@@ -6,16 +6,19 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
@@ -48,6 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static InterstitialAd mInterstitialAd;
     private SharedPreferences preferences;
     public static int countForAd;
+    private ListAdapter adapter;
+    private String selection = SQLiteDBHelper.KEY_NAME + " like ?";
+    private String[] selectionArgs = {"%%"};
+    private MenuItem item;
+    private SearchView searchView;
+    private TextView noData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +64,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.main_layout);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
+        fab.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                fab.requestFocus();
+                return false;
+            }
+        });
+
 
         //Setup default sharedPreferences
         initSharedPreferences();
 
         constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
+
+        //create TextView noData for empty ListView
+        noData = new TextView(MainActivity.this);
+        noData.setText(R.string.noData);
+        noData.setGravity(Gravity.CENTER);
+        noData.setTextSize(getResources().getDimension(R.dimen.size12));
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        noData.setLayoutParams(params);
+        constraintLayout.addView(noData);
+
         lv_dynamic = (ListView) findViewById(R.id.lv_dynamic);
         tv_id = (TextView) findViewById(R.id.tv_id);
+
         QueryToDB();
+
         mAdView = findViewById(R.id.adView);
         MobileAds.initialize(this, getResources().getString(R.string.APP_ID));
 
@@ -88,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
     }
+
 
     //Setup default sharedPreferences
     private void initSharedPreferences() {
@@ -142,7 +173,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_item, menu);
-        return true;
+        item = menu.findItem(R.id.search);
+        searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                selectionArgs = new String[] {"%" + newText.toLowerCase().trim() + "%"};
+                QueryToDB();
+                return true;
+            }
+        });
+    return true;
     }
 
     public void onContextChange(MenuItem item){
@@ -180,91 +226,93 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void QueryToDB() {
-        try {
-            dbHelper = new SQLiteDBHelper(this);
-            db = dbHelper.getReadableDatabase();
-            Cursor cursor = db.query(SQLiteDBHelper.TABLE_NAME, SQLiteDBHelper.COLUMNS_NAMES, null, null, null, null, null);
-            ArrayList<DataForListView> list = new ArrayList<>();
-            //Calendar current_date = Calendar.getInstance();
+//        new Thread(){
+//            @Override
+//            public void run() {
 
-            if (cursor.getCount() == 0) {
-                TextView noData = new TextView(MainActivity.this);
-                noData.setText(R.string.noData);
-                noData.setGravity(Gravity.CENTER);
-                noData.setTextSize(getResources().getDimension(R.dimen.size12));
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                noData.setLayoutParams(params);
-                constraintLayout.addView(noData);
-            } else {
-                cursor.moveToFirst();
-                do {
-                    int id = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_ID));
-                    String name = cursor.getString(cursor.getColumnIndex(SQLiteDBHelper.KEY_NAME));
-                    String phone = cursor.getString(cursor.getColumnIndex(SQLiteDBHelper.KEY_PHONE));
+                try {
+                    dbHelper = new SQLiteDBHelper(getApplicationContext());
+                    db = dbHelper.getReadableDatabase();
+                    Cursor cursor = db.query(SQLiteDBHelper.TABLE_NAME, SQLiteDBHelper.COLUMNS_NAMES, selection, selectionArgs, null, null, null);
+                    ArrayList<DataForListView> list = new ArrayList<>();
+                    //Calendar current_date = Calendar.getInstance();
 
-                    String type = "";
-                    switch (cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_CELEBRATION_TYPE))) {
-                        case 1:
-                            type = getResources().getString(R.string.Birthday) + ":";
-                            break;
-                        case 2:
-                            type = getResources().getString(R.string.Anniversary) + ":";
-                            break;
-                        case 3:
-                            type = getResources().getString(R.string.Another) + ":";
-                            break;
+                    if (cursor.getCount() == 0) {
+                        noData.setVisibility(View.VISIBLE);
+                    } else {
+                        noData.setVisibility(View.INVISIBLE);
+                        cursor.moveToFirst();
+                        do {
+                            int id = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_ID));
+                            String name = cursor.getString(cursor.getColumnIndex(SQLiteDBHelper.KEY_NAME));
+                            String phone = cursor.getString(cursor.getColumnIndex(SQLiteDBHelper.KEY_PHONE));
+
+                            String type = "";
+                            switch (cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_CELEBRATION_TYPE))) {
+                                case 1:
+                                    type = getResources().getString(R.string.Birthday) + ":";
+                                    break;
+                                case 2:
+                                    type = getResources().getString(R.string.Anniversary) + ":";
+                                    break;
+                                case 3:
+                                    type = getResources().getString(R.string.Another) + ":";
+                                    break;
+                            }
+
+                            String date;
+                            int year = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_YEAR));
+                            int month = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_MONTH));
+                            int day = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_DAY));
+
+                            if (Locale.getDefault().getLanguage().equals("ru") || Locale.getDefault().getLanguage().equals("uk")) {
+                                date = day + "/" + month + "/" + year;
+                            } else date = year + "-" + month + "-" + day;
+
+                            //Calculate age
+                            int age = new HowOld().getHowOld(year, month, day);
+
+                            list.add(new DataForListView(String.valueOf(id), name, phone, type, String.valueOf(age), date));
+                        } while (cursor.moveToNext());
                     }
 
-                    String date;
-                    int year = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_YEAR));
-                    int month = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_MONTH));
-                    int day = cursor.getInt(cursor.getColumnIndex(SQLiteDBHelper.KEY_DAY));
+                    adapter = new SimpleAdapter(MainActivity.this, list, R.layout.not_simple_item, new String[]
+                            {SQLiteDBHelper.KEY_ID, SQLiteDBHelper.KEY_NAME, SQLiteDBHelper.KEY_PHONE, SQLiteDBHelper.KEY_CELEBRATION_TYPE, "date", "age"},
+                            new int[] {R.id.tv_id, R.id.name_container, R.id.phone_container, R.id.type_container, R.id.date_container, R.id.age_container});
+                    lv_dynamic.setAdapter(adapter);
+                    lv_dynamic.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                            TextView mTv_id = (TextView) view.findViewById(R.id.tv_id);
+                            TextView mName_container = (TextView) view.findViewById(R.id.name_container);
+                            TextView mPhone_container = (TextView) view.findViewById(R.id.phone_container);
+                            mItemId = Integer.parseInt(mTv_id.getText().toString());
+                            mItemName = mName_container.getText().toString();
+                            mItemPhone = mPhone_container.getText().toString();
+                            return false;
+                        }
+                    });
+                    lv_dynamic.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+                        @Override
+                        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+                            MenuInflater inflater = new MenuInflater(v.getContext());
+                            inflater.inflate(R.menu.context_menu, menu);
+                        }
+                    });
 
-                    if (Locale.getDefault().getLanguage().equals("ru") || Locale.getDefault().getLanguage().equals("uk")) {
-                        date = day + "/" + month + "/" + year;
-                    } else date = year + "-" + month + "-" + day;
-
-                    //Calculate age
-                    int age = new HowOld().getHowOld(year, month, day);
-
-                    list.add(new DataForListView(String.valueOf(id), name, phone, type, String.valueOf(age), date));
-                } while (cursor.moveToNext());
+                    cursor.close();
+                } catch (final Exception e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                finally {
+                    db.close();
+                }
             }
-
-            ListAdapter adapter = new SimpleAdapter(MainActivity.this, list, R.layout.not_simple_item, new String[]
-                    {SQLiteDBHelper.KEY_ID, SQLiteDBHelper.KEY_NAME, SQLiteDBHelper.KEY_PHONE, SQLiteDBHelper.KEY_CELEBRATION_TYPE, "date", "age"},
-                    new int[] {R.id.tv_id, R.id.name_container, R.id.phone_container, R.id.type_container, R.id.date_container, R.id.age_container});
-            lv_dynamic.setAdapter(adapter);
-            lv_dynamic.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    TextView mTv_id = (TextView) view.findViewById(R.id.tv_id);
-                    TextView mName_container = (TextView) view.findViewById(R.id.name_container);
-                    TextView mPhone_container = (TextView) view.findViewById(R.id.phone_container);
-                    mItemId = Integer.parseInt(mTv_id.getText().toString());
-                    mItemName = mName_container.getText().toString();
-                    mItemPhone = mPhone_container.getText().toString();
-                    return false;
-                }
-            });
-            lv_dynamic.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-                @Override
-                public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                    MenuInflater inflater = new MenuInflater(v.getContext());
-                    inflater.inflate(R.menu.context_menu, menu);
-                }
-            });
-
-            cursor.close();
-        } catch (Exception e) {
-            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        finally {
-            db.close();
-            fab.requestFocus();
-        }
-    }
 
     @Override
     public void onClick(View v) {

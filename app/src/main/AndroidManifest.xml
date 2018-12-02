@@ -46,6 +46,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+        <service android:name=".WhoCelebratingNotification"
+            android:exported="false"
+            android:enabled="true"
+            android:label="@string/serviceName"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
