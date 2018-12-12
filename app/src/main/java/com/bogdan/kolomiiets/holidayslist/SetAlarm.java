@@ -1,4 +1,4 @@
-package com.bogdan.kolomiiets.birthdayslist;
+package com.bogdan.kolomiiets.holidayslist;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -26,7 +26,7 @@ public class SetAlarm {
                 calendar.setTimeInMillis(System.currentTimeMillis());
                 calendar.set(Calendar.HOUR_OF_DAY, hour);
                 calendar.set(Calendar.MINUTE, minute);
-                mAlarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), 5*5000, mPendingIntent);
+                mAlarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, mPendingIntent);
             }
         } catch (Exception e) {
             Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();

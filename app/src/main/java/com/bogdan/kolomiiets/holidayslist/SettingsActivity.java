@@ -1,4 +1,4 @@
-package com.bogdan.kolomiiets.birthdayslist;
+package com.bogdan.kolomiiets.holidayslist;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

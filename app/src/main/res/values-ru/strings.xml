@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Список дней рождений</string>
-    <string name="title_activity_new_birthday">Новый день рожденья</string>
-    <string name="btnCancel_text">Закрыть</string>
+    <string name="app_name">Список праздников</string>
+    <string name="title_activity_new_birthday">Новый праздник</string>
+    <string name="btnClose_text">Закрыть</string>
     <string name="btnOK_text">Добавить</string>
     <string name="Birthday">День рождения</string>
     <string name="Name">Имя</string>
-    <string name="Added">День рожденья сохранено успешно</string>
-    <string name="NoAdded">Что-то пошло не так. День рождения не добавлено в базу</string>
     <string name="aboutTheProgram">О программе</string>
     <string name="txtEmail">С наилучшими пожеланиями:\nbogdan.kolomiiets@gmail.com</string>
     <string name="Anniversary">Годовщина</string>
-    <string name="Another">Другое</string>
-    <string name="txtType">"Тип "</string>
-    <string name="BirthdayDate">Укажите дату праздника</string>
+    <string name="Holiday">Праздник</string>
+    <string name="txtType">"Тип"</string>
+    <string name="CelebrationDate">Укажите дату праздника</string>
     <string name="PersonName">Имя (можно полностью)</string>
     <string name="noSelectContact">Контакт не выбран</string>
     <string name="delete">Удалить</string>
@@ -35,11 +33,11 @@
     <string name="notDeleted">Ошибка! Дата не удалена</string>
     <string name="updated">Данные обновились успешно</string>
     <string name="notUpdated">Ошибка! Данные не обновились</string>
-    <string name="birthdaysToday">Сегодня празднует</string>
-    <string name="birthdayTomorrow">Завтра праздник в</string>
-    <string name="birthdayAfterTomorrow">Послезавтра праздник в</string>
+    <string name="CelebratesToday">Сегодня празднует</string>
+    <string name="CelebratesTomorrow">Завтра праздник:</string>
+    <string name="CelebratesAfterTomorrow">Послезавтра праздник:</string>
     <string name="empty">Имя не задано</string>
-    <string name="aboutMessage">Это моя первая программа на языке программирования Java для Android. Программа позволяет Вам создать список дней рождения и напомнить Вам о них.</string>
+    <string name="aboutMessage">Программа позволяет Вам создать список дней рождений, годовщин, государственных или церковных праздников и будет напоминать Вам о них в заданное время, чтобы никто из ваших друзей или близких не остался без внимания.</string>
     <string name="switchReminder">Включить напоминание</string>
     <string name="remindOneDays">напомнить за день</string>
     <string name="remindTwoDays">напомнить за 2 дня</string>
@@ -49,5 +47,15 @@
     <string name="sms">СМС</string>
     <string name="yearsOld">Лет:</string>
     <string name="search">Поиск</string>
+    <string name="Export">Экспорт в файл</string>
+    <string name="Import">Импорт в базу</string>
+    <string name="fileSaved">Файл сохранен в:</string>
+    <string name="noDataToSave">Нет данных для сохранения</string>
+    <string name="exported">записей экспортировано</string>
+    <string name="noWritePermission">Нет разрешения на запись файлов</string>
+    <string name="HolidayName">Название праздника</string>
+    <string name="ImportedSuccessful">Импортировано успешно</string>
+    <string name="notImported">Что-то пошло не так, импорт не удался</string>
+    <string name="phoneEmpty">нет</string>
 
 </resources>

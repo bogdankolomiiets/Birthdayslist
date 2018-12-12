@@ -1,22 +1,22 @@
 <resources>
-    <string name="app_name">Birthdays list</string>
-    <string name="title_activity_new_birthday">New Birthday</string>
+    <string name="app_name">Holidays list</string>
+    <string name="file_name" translatable="false">Holidays list</string>
+    <string name="title_activity_new_birthday">New celebration</string>
     <string name="btnOK_text">Add</string>
-    <string name="btnCancel_text">Close</string>
+    <string name="btnClose_text">Close</string>
     <string name="Birthday">Birthday</string>
     <string name="Name">Person Name</string>
-    <string name="Added">Birthday added successfully</string>
-    <string name="NoAdded">Something went wrong. Data not added to base</string>
     <string name="PersonName">Name</string>
+    <string name="HolidayName">Holiday name</string>
     <string name="Error">Error</string>
-    <string name="BirthdayDate">Date of Birthday</string>
+    <string name="CelebrationDate">Date of celebration</string>
     <string name="PhoneNumber">Phone number (optional)</string>
     <string name="aboutTheProgram">About the program</string>
     <string name="settingsMenuItem">Settings</string>
     <string name="txtType">Type of celebration</string>
     <string name="Anniversary">Anniversary</string>
-    <string name="Another">Another</string>
-    <string name="aboutMessage">This is my first program in Java programming language for android. The program allows you to create a list of birthdays and remind you of them.</string>
+    <string name="Holiday">Holiday</string>
+    <string name="aboutMessage">The program allows you to create a list of birthdays, anniversaries, state or church holidays and will remind you of them at a specified time. So, nobody of your relatives or friends will not be ignored.</string>
     <string name="txtEmail">Best regards:\nbogdan.kolomiiets@gmail.com</string>
     <string name="noSelectContact">You did\'t select a contact</string>
     <string name="insertedSuccessful">New data inserted successful</string>
@@ -35,15 +35,15 @@
     <string name="notDeleted">Something went wrong. Not Deleted</string>
     <string name="updated">Data updated successfully</string>
     <string name="notUpdated">Something went wrong. Data not updated</string>
-    <string name="birthdaysToday">Today celebrate</string>
-    <string name="birthdayTomorrow">Tomorrow will celebrate</string>
-    <string name="birthdayAfterTomorrow">After tomorrow will celebrate</string>
+    <string name="CelebratesToday">Today celebrate</string>
+    <string name="CelebratesTomorrow">Tomorrow will celebrate</string>
+    <string name="CelebratesAfterTomorrow">After tomorrow will celebrate</string>
     <string name="empty">Enter the name</string>
     <string name="APP_ID" translatable="false">ca-app-pub-8123334718162410~4155812837</string>
     <string name="AdMobID" translatable="false">ca-app-pub-8123334718162410/7021649320</string>
     <string name="AdMobIDTest" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="switchReminder">Enable reminder" "</string>
-    <string name="remindInSameDay">remind on the same day</string>
+    <string name="remindInSameDay">remind same day</string>
     <string name="remindOneDays">remind the day before</string>
     <string name="remindTwoDays">remind 2 days before</string>
     <string name="ReminderTime">Reminder time:</string>
@@ -51,6 +51,15 @@
     <string name="sms">SEND SMS</string>
     <string name="yearsOld">years old:</string>
     <string name="search">Search</string>
+    <string name="Export">Export to file</string>
+    <string name="Import">Import to database</string>
     <string name="serviceName" translatable="false">Celebration service</string>
+    <string name="fileSaved">File saved to:</string>
+    <string name="noDataToSave">No data to save</string>
+    <string name="exported">entries exported</string>
+    <string name="noWritePermission">Not have permission to write files</string>
+    <string name="ImportedSuccessful">Import successful</string>
+    <string name="notImported">Something went wrong. Data not imported</string>
+    <string name="phoneEmpty">empty</string>
 
 </resources>

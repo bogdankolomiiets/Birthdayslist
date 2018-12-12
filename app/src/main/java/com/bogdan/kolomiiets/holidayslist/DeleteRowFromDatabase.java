@@ -1,8 +1,7 @@
-package com.bogdan.kolomiiets.birthdayslist;
+package com.bogdan.kolomiiets.holidayslist;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class DeleteRowFromDatabase{
 
@@ -19,7 +18,6 @@ public class DeleteRowFromDatabase{
     public boolean deleteRow(){
         helper = new SQLiteDBHelper(context);
         db = helper.getWritableDatabase();
-        Log.d("HERE", "I am");
         return db.delete(SQLiteDBHelper.TABLE_NAME, SQLiteDBHelper.KEY_ID + "=" + mId, null) > 0;
     }
 }

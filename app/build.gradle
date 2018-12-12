@@ -7,7 +7,7 @@ android {
     }
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.bogdan.kolomiiets.birthdayslist"
+        applicationId "com.bogdan.kolomiiets.holidayslist"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 1

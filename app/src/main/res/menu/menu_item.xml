@@ -2,6 +2,14 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_magnify"
+        android:orderInCategory="1"
+        android:title="@string/search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/settings"
         android:title="@string/settingsMenuItem"
         android:orderInCategory="2"
@@ -12,18 +20,30 @@
     <item
         android:id="@+id/about"
         android:title="@string/aboutTheProgram"
-        android:orderInCategory="3"
+        android:orderInCategory="5"
         android:onClick="onAboutMenuItem"
         android:icon="@drawable/ic_information"
         app:showAsAction="collapseActionView"/>
 
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_magnify"
-        android:orderInCategory="1"
-        android:title="@string/search"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/export"
+        android:title="@string/Export"
+        android:icon="@drawable/ic_file_export"
+        android:orderInCategory="3"
+        android:onClick="onExportData"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/Import"
+        android:title="@string/Import"
+        android:icon="@drawable/ic_database_import"
+        android:orderInCategory="4"
+        android:onClick="onImportData"
+        app:showAsAction="collapseActionView"/>
+
+
+
+
 
 
 </menu>

@@ -1,4 +1,4 @@
-package com.bogdan.kolomiiets.birthdayslist;
+package com.bogdan.kolomiiets.holidayslist;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -14,6 +14,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
+
 import java.util.Calendar;
 
 public class WhoCelebratingNotification extends Service {
@@ -32,19 +33,22 @@ public class WhoCelebratingNotification extends Service {
         int when = getApplicationContext().getSharedPreferences(SettingsActivity.PREFERENCES_NAME, Context.MODE_PRIVATE).getInt(SettingsActivity.CHECKED_RADIO, 0);
 
         String strWhen = "";
-        switch (when){
-            case 0: strWhen = getApplicationContext().getString(R.string.birthdaysToday);
+        switch (when) {
+            case 0:
+                strWhen = getApplicationContext().getString(R.string.CelebratesToday);
                 break;
-            case 1: strWhen = getApplicationContext().getString(R.string.birthdayTomorrow);
+            case 1:
+                strWhen = getApplicationContext().getString(R.string.CelebratesTomorrow);
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
                 break;
-            case 2: strWhen = getApplicationContext().getString(R.string.birthdayAfterTomorrow);
+            case 2:
+                strWhen = getApplicationContext().getString(R.string.CelebratesAfterTomorrow);
                 calendar.add(Calendar.DAY_OF_MONTH, 2);
                 break;
         }
 
         String selection = SQLiteDBHelper.KEY_DAY + " = ? and " + SQLiteDBHelper.KEY_MONTH + " = ?";
-        String selectionArgs[] = new String[] {String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)), String.valueOf(calendar.get(Calendar.MONTH) + 1)};
+        String selectionArgs[] = new String[]{String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)), String.valueOf(calendar.get(Calendar.MONTH) + 1)};
         try {
             Cursor c = database.query(SQLiteDBHelper.TABLE_NAME, SQLiteDBHelper.COLUMNS_NAMES, selection, selectionArgs, null, null, null);
             if (c.getCount() > 0) {
@@ -67,8 +71,11 @@ public class WhoCelebratingNotification extends Service {
                             .setContentText(c.getString(c.getColumnIndex(SQLiteDBHelper.KEY_NAME)))
                             .setAutoCancel(true)
                             .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
-                            .setDefaults(Notification.DEFAULT_VIBRATE)
-                            .setContentIntent(pendingIntent);
+                            .setDefaults(Notification.DEFAULT_VIBRATE);
+
+                    if (c.getInt(c.getColumnIndex(SQLiteDBHelper.KEY_CELEBRATION_TYPE)) != 3) {
+                        builder.setContentIntent(pendingIntent);
+                    }
 
                     NotificationManager manager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                     if (Build.VERSION.SDK_INT >= 26) {
@@ -81,8 +88,7 @@ public class WhoCelebratingNotification extends Service {
             }
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        finally {
+        } finally {
             database.close();
             stopSelf();
         }

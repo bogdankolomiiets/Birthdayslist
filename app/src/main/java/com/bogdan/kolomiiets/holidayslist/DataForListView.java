@@ -1,4 +1,4 @@
-package com.bogdan.kolomiiets.birthdayslist;
+package com.bogdan.kolomiiets.holidayslist;
 
 import java.util.HashMap;
 
