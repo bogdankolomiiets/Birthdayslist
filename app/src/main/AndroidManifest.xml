@@ -1,61 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bogdan.kolomiiets.holidayslist"
+    package="com.bogdan.kolomiiets.birthdayreminder"
     android:installLocation="auto">
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".BirthdayApp"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:name=".views.MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".NewCelebrationActivity"
-            android:label="@string/title_activity_new_birthday"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".NotificationDetail"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".EditCelebrationActivity"
-            android:label="Edit"
-            android:theme="@style/AppTheme" />
 
-        <receiver android:name=".CelebrationReceiver"
+        <activity
+            android:name=".views.NewOrUpdateEventActivity" android:parentActivityName=".views.MainActivity"
+            android:label="@string/new_event" />
+
+        <activity
+            android:name=".views.NotificationDetail"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".views.SettingsActivity" android:parentActivityName=".views.MainActivity"
+            android:label="@string/app_name" />
+
+        <service
+            android:name=".utils.WhoCelebrateService"
             android:enabled="true"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/service_name" />
+
+        <receiver android:name=".receivers.CelebrationReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <service android:name=".WhoCelebratingNotification"
-            android:exported="false"
-            android:enabled="true"
-            android:label="@string/serviceName"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8123334718162410~4155812837"/>
+            android:value="ca-app-pub-8123334718162410~4155812837" />
     </application>
 
 </manifest>

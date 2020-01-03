@@ -1,5 +1,16 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="size12">12dp</dimen>
-    <dimen name="dividerHeight">0.5dp</dimen>
+    <dimen name="value_4dp">4dp</dimen>
+    <dimen name="value_8dp">8dp</dimen>
+    <dimen name="value_16dp">16dp</dimen>
+    <dimen name="value_30dp">30dp</dimen>
+    <dimen name="value_32dp">32dp</dimen>
+    <dimen name="value_40dp">40dp</dimen>
+    <dimen name="value_100dp">100dp</dimen>
+    <dimen name="size_12sp">12sp</dimen>
+    <dimen name="size_14sp">14sp</dimen>
+    <dimen name="size_16sp">16sp</dimen>
+    <dimen name="size_18sp">18sp</dimen>
+    <dimen name="size_20sp">20sp</dimen>
+    <dimen name="size_24sp">24sp</dimen>
+    <dimen name="size_30sp">30sp</dimen>
 </resources>

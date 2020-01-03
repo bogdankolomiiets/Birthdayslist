@@ -5,10 +5,10 @@
         android:id="@+id/context_change"
         android:onClick="onContextChange"
         android:title="@string/change"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/context_delete"
         android:onClick="onContextDelete"
         android:title="@string/delete"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 </menu>

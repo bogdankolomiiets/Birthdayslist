@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="event"
+            type="com.bogdan.kolomiiets.birthdayreminder.models.Event" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="@dimen/value_8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/name_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/roboto_black"
+                android:padding="@dimen/value_4dp"
+                android:text="@{event.name}"
+                android:textColor="@color/colorWaikawaGray"
+                android:textSize="@dimen/size_20sp"
+                tools:text="Bohdan Kolomiiets" />
+
+            <TextView
+                android:id="@+id/phone_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_container"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/age_container"
+                android:drawableStart="@drawable/cellphone_android"
+                android:drawablePadding="@dimen/value_4dp"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/value_4dp"
+                android:text="@{event.phone}"
+                android:textColor="@color/colorWaikawaGrayOpacity50"
+                android:textSize="@dimen/size_18sp"
+                tools:text="+380683111845" />
+
+            <TextView
+                android:id="@+id/type_container"
+                convertIntTypeToString="@{event.type}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone_container"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/value_4dp"
+                android:paddingTop="@dimen/value_4dp"
+                android:paddingBottom="@dimen/value_4dp"
+                android:textColor="@color/colorWaikawaGrayOpacity50"
+                android:textSize="18sp"
+                tools:text="@string/birthday" />
+
+            <TextView
+                android:id="@+id/date_container"
+                eventDay="@{event.day}"
+                eventMonth="@{event.month}"
+                eventYear="@{event.year}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone_container"
+                android:layout_marginStart="@dimen/value_4dp"
+                android:layout_toEndOf="@+id/type_container"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="@dimen/value_4dp"
+                android:paddingTop="@dimen/value_4dp"
+                android:paddingBottom="@dimen/value_4dp"
+                android:textColor="@color/colorWaikawaGrayOpacity50"
+                android:textSize="18sp"
+                tools:text="11.09.1985" />
+
+            <TextView
+                android:id="@+id/age_container"
+                eventDay="@{event.day}"
+                eventMonth="@{event.month}"
+                eventYear="@{event.year}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/roboto_black"
+                android:padding="@dimen/value_4dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/size_30sp"
+                tools:text="34" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

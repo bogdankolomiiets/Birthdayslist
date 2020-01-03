@@ -2,48 +2,33 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/search"
+        android:id="@+id/item_search"
         android:icon="@drawable/ic_magnify"
-        android:orderInCategory="1"
         android:title="@string/search"
-        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/settings"
-        android:title="@string/settingsMenuItem"
-        android:orderInCategory="2"
-        android:onClick="onSettingsMenuItem"
+        android:id="@+id/item_settings"
+        android:title="@string/settings"
         android:icon="@drawable/ic_settings"
         app:showAsAction="collapseActionView"/>
 
     <item
-        android:id="@+id/about"
-        android:title="@string/aboutTheProgram"
-        android:orderInCategory="5"
-        android:onClick="onAboutMenuItem"
+        android:id="@+id/item_export_to_file"
+        android:title="@string/export_to_file"
+        android:icon="@drawable/ic_file_export"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/item_import_into_database"
+        android:title="@string/import_into_database"
+        android:icon="@drawable/ic_database_import"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/item_about"
+        android:title="@string/about_the_program"
         android:icon="@drawable/ic_information"
         app:showAsAction="collapseActionView"/>
-
-    <item
-        android:id="@+id/export"
-        android:title="@string/Export"
-        android:icon="@drawable/ic_file_export"
-        android:orderInCategory="3"
-        android:onClick="onExportData"
-        app:showAsAction="collapseActionView"/>
-
-    <item
-        android:id="@+id/Import"
-        android:title="@string/Import"
-        android:icon="@drawable/ic_database_import"
-        android:orderInCategory="4"
-        android:onClick="onImportData"
-        app:showAsAction="collapseActionView"/>
-
-
-
-
-
-
 </menu>

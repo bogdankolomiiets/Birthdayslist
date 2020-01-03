@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/value_8dp"
+    tools:context=".views.NewOrUpdateEventActivity">
+
+    <TextView
+        android:id="@+id/type_title"
+        style="@style/TextViewTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/event_type"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radio_buttons_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/value_8dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type_title">
+
+        <RadioButton
+            android:id="@+id/radio_birthday"
+            style="@style/ReminderRadioButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/birthday" />
+
+        <RadioButton
+            android:id="@+id/radio_anniversary"
+            style="@style/ReminderRadioButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/anniversary" />
+
+        <RadioButton
+            android:id="@+id/radio_holiday"
+            style="@style/ReminderRadioButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/holiday" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/person_name"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/value_8dp"
+        android:layout_toStartOf="@+id/pick_contact_btn"
+        android:autofillHints=""
+        android:hint="@string/name"
+        android:inputType="textCapWords"
+        android:textColorHint="@color/colorWaikawaGrayOpacity50"
+        app:layout_constraintBottom_toBottomOf="@id/pick_contact_btn"
+        app:layout_constraintEnd_toStartOf="@id/pick_contact_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pick_contact_btn"
+        tools:targetApi="O" />
+
+    <ImageButton
+        android:id="@+id/pick_contact_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pick_contact_background"
+        android:contentDescription="@string/pick_contact_btn_description"
+        android:padding="@dimen/value_16dp"
+        android:src="@drawable/ic_account_search"
+        app:layout_constraintEnd_toStartOf="@id/date_picker"
+        app:layout_constraintTop_toBottomOf="@id/radio_buttons_container" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/value_8dp"
+        android:autofillHints=""
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        android:textColorHint="@color/colorWaikawaGrayOpacity50"
+        app:layout_constraintEnd_toStartOf="@id/date_picker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/person_name"
+        tools:targetApi="O" />
+
+    <TextView
+        android:id="@+id/select_date_title"
+        style="@style/TextViewTitleStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/date_of_celebration"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/date_picker"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_date_title" />
+
+    <Button
+        android:id="@+id/save_btn"
+        style="@style/ButtonsStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ok_btn_background"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
