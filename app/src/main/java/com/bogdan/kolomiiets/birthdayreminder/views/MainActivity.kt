@@ -15,12 +15,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bogdan.kolomiiets.birthdayreminder.Constants
+import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT
 import com.bogdan.kolomiiets.birthdayreminder.R
 import com.bogdan.kolomiiets.birthdayreminder.adapters.EventsRecyclerViewAdapter
+import com.bogdan.kolomiiets.birthdayreminder.models.Event
+import com.bogdan.kolomiiets.birthdayreminder.utils.OnPopUpMenuItemClick
 import com.bogdan.kolomiiets.birthdayreminder.viewmodels.EventsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity: AppCompatActivity(), View.OnClickListener{
+class MainActivity: AppCompatActivity(), View.OnClickListener, OnPopUpMenuItemClick{
     private lateinit var newEventFab: FloatingActionButton
     private lateinit var noEvents: TextView
     private lateinit var eventViewModel: EventsViewModel
@@ -48,7 +52,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         //setup recyclerView
         eventRecyclerView.setHasFixedSize(true)
         eventRecyclerView.layoutManager = LinearLayoutManager(this)
-        eventsRecyclerViewAdapter = EventsRecyclerViewAdapter()
+        eventsRecyclerViewAdapter = EventsRecyclerViewAdapter(this)
         eventRecyclerView.adapter = eventsRecyclerViewAdapter
     }
 
@@ -104,5 +108,13 @@ class MainActivity: AppCompatActivity(), View.OnClickListener{
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun deleteItemClick(eventId: Int) {
+        eventViewModel.deleteEvent(eventId)
+    }
+
+    override fun changeItemClick(event: Event) {
+        startActivity(Intent(this, NewOrUpdateEventActivity::class.java).putExtra(EVENT, event))
     }
 }

@@ -18,5 +18,6 @@ class Constants {
         const val EVENT_TYPE_BIRTHDAY = 1
         const val EVENT_TYPE_ANNIVERSARY = 2
         const val EVENT_TYPE_HOLIDAY = 3
+        const val REMINDER_ON_OFF = "REMINDER_ON_OFF"
     }
 }

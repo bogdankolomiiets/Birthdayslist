@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 @Override
                                 public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                                     MenuInflater inflater = new MenuInflater(v.getContext());
-                                    inflater.inflate(R.menu.context_menu, menu);
+                                    inflater.inflate(R.menu.popup_menu, menu);
                                 }
                             });
                         }

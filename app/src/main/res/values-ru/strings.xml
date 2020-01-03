@@ -48,8 +48,8 @@
     <string name="holiday_name">Название праздника</string>
     <string name="imported_successful">Импортировано успешно</string>
     <string name="not_imported">Что-то пошло не так, импорт не удался</string>
-    <string name="phone_empty">нет</string>
     <string name="undefined">Не определено</string>
     <string name="no_events">Нет данных для отображения</string>
+    <string name="age">Возраст:</string>
 
 </resources>

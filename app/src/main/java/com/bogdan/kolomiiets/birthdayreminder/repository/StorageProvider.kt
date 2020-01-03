@@ -15,8 +15,8 @@ class StorageProvider {
         Executors.newSingleThreadExecutor().execute {eventsDao.insertEvent(event)}
     }
 
-    fun deleteEvent(event: Event){
-        Executors.newSingleThreadExecutor().execute {eventsDao.deleteEvent(event)}
+    fun deleteEvent(eventId: Int){
+        Executors.newSingleThreadExecutor().execute {eventsDao.deleteEvent(eventId)}
     }
 
     fun updateEvent(event: Event){
@@ -28,7 +28,7 @@ class StorageProvider {
     }
 
     fun getEvents(eventName: String): LiveData<List<Event>> {
-        return eventsDao.getEvents(eventName)
+        return eventsDao.getEvents("%$eventName%")
     }
 
     fun getEventsOnToday(): List<Event> {

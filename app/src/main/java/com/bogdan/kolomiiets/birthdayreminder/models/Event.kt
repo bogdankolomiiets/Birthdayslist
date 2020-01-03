@@ -17,9 +17,9 @@ import kotlinx.android.parcel.Parcelize
 data class Event(
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = EVENT_ID) val id: Int = 0,
-        @ColumnInfo(name = EVENT_NAME) val name: String,
-        val phone: String = "",
-        val type: Int,
-        @ColumnInfo(name = EVENT_YEAR) val year: Int,
-        @ColumnInfo(name = EVENT_MONTH) val month: Int,
-        @ColumnInfo(name = EVENT_DAY) val day: Int) : Parcelable
+        @ColumnInfo(name = EVENT_NAME) var name: String = "",
+        var phone: String = "",
+        var type: Int = 0,
+        @ColumnInfo(name = EVENT_YEAR) var year: Int = 0,
+        @ColumnInfo(name = EVENT_MONTH) var month: Int = 0,
+        @ColumnInfo(name = EVENT_DAY) var day: Int = 0) : Parcelable

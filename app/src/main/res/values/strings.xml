@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Event reminder</string>
+    <string name="app_name">Event reminder</string>
     <string name="file_name" translatable="false">Birthday reminder</string>
     <string name="new_event">New event</string>
     <string name="add">Add</string>
@@ -53,11 +53,11 @@
     <string name="exported">entries exported</string>
     <string name="imported_successful">Import successful</string>
     <string name="not_imported">Something went wrong. Data not imported</string>
-    <string name="phone_empty">empty</string>
     <string name="undefined">Undefined</string>
     <string name="pick_contact_btn_description" translatable="false">Pick contact button</string>
     <string name="no_events">No events</string>
     <string name="cellphone_image" translatable="false">cellphone image</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="age">Age:</string>
 
 </resources>

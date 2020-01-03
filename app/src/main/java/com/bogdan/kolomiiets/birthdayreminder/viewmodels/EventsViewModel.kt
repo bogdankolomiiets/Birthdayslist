@@ -7,17 +7,16 @@ import androidx.lifecycle.ViewModel
 import com.bogdan.kolomiiets.birthdayreminder.models.Event
 import com.bogdan.kolomiiets.birthdayreminder.repository.StorageProvider
 
-class EventsViewModel: ViewModel() {
+class EventsViewModel : ViewModel() {
     private val storageProvider = StorageProvider()
     val events: LiveData<List<Event>>
-    val filter = MutableLiveData<String>()
+    val filter = MutableLiveData<String>("")
 
     init {
-        events = storageProvider.getEvents()
-        filter.observeForever { filterEvents() }
+        events = Transformations.switchMap(filter) { storageProvider.getEvents(it) }
     }
 
-    private fun filterEvents(){
-        Transformations.switchMap(filter) { input -> storageProvider.getEvents(input) }.value
+    fun deleteEvent(eventId: Int) {
+        storageProvider.deleteEvent(eventId)
     }
 }
