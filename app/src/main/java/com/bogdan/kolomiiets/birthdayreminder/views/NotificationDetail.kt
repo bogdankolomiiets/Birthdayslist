@@ -3,12 +3,11 @@ package com.bogdan.kolomiiets.birthdayreminder.views
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.DragEvent
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.bogdan.kolomiiets.birthdayreminder.Constants
+import androidx.core.view.isVisible
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT
 import com.bogdan.kolomiiets.birthdayreminder.R
 import com.bogdan.kolomiiets.birthdayreminder.models.Event
@@ -18,8 +17,7 @@ import com.bogdan.kolomiiets.birthdayreminder.utils.convertIntTypeToString
 class NotificationDetail: AppCompatActivity(), View.OnClickListener {
     private lateinit var personName: TextView
     private lateinit var typeOfCelebration: TextView
-    private lateinit var phone: TextView
-    private lateinit var howOld: TextView
+    private lateinit var age: TextView
     private lateinit var callBtn: Button
     private lateinit var smsBtn: Button
     private lateinit var closeBtn: Button
@@ -32,8 +30,7 @@ class NotificationDetail: AppCompatActivity(), View.OnClickListener {
         //init components
         personName = findViewById(R.id.person_name)
         typeOfCelebration = findViewById(R.id.type_of_celebration)
-        phone = findViewById(R.id.phone)
-        howOld = findViewById(R.id.how_old)
+        age = findViewById(R.id.age)
         callBtn = findViewById(R.id.call_btn)
         smsBtn = findViewById(R.id.sms_btn)
         closeBtn = findViewById(R.id.close_btn)
@@ -45,24 +42,27 @@ class NotificationDetail: AppCompatActivity(), View.OnClickListener {
 
         event = intent.getParcelableExtra(EVENT)
 
-        event.let {
-            personName.text = event?.name
-            typeOfCelebration.convertIntTypeToString(event?.type ?: 0)
-            phone.text = event?.phone
-            howOld.calculateAge(event?.year ?: 0, event?.month ?: 0, event?.day ?: 0)
+        event?.let {
+            personName.text = it.name
+            typeOfCelebration.convertIntTypeToString(it.type)
+            age.calculateAge(it.year, it.month, it.day)
         }
+
+        //if event doesn't have phone
+        smsBtn.isVisible = event?.phone?.isNotEmpty() ?: false
+        callBtn.isVisible = event?.phone?.isNotEmpty() ?: false
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.call_btn -> {
                 val intentCall = Intent(Intent.ACTION_DIAL)
-                intentCall.data = Uri.parse("tel:" + phone.text)
+                intentCall.data = Uri.parse("tel:" + event?.phone)
                 startActivity(intentCall)
             }
             R.id.sms_btn -> {
                 val intentSMS = Intent(Intent.ACTION_SENDTO)
-                intentSMS.data = Uri.parse("sms:" + phone.text)
+                intentSMS.data = Uri.parse("sms:" + event?.phone)
                 startActivity(intentSMS)
             }
             R.id.close_btn -> finish()

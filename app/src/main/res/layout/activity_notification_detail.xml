@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/value_8dp">
 
     <TextView
         android:id="@+id/person_name"
@@ -10,11 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textSize="@dimen/size_24sp"
-        android:textColor="@color/colorCocoaBean"
         android:fontFamily="@font/roboto_black"
+        android:textColor="@color/colorCocoaBean"
+        android:textSize="@dimen/size_24sp"
         tools:text="Bohdan Kolomiiets" />
 
     <TextView
@@ -23,39 +22,23 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/person_name"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textSize="@dimen/size_18sp"
-        android:textColor="@color/colorCocoaBeanOpacity50"
         android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/colorCocoaBeanOpacity50"
+        android:textSize="@dimen/size_18sp"
         tools:text="Birthday" />
 
-
-
     <TextView
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/type_of_celebration"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textSize="@dimen/size_18sp"
-        android:textColor="@color/colorCocoaBeanOpacity50"
-        android:fontFamily="@font/roboto_medium"
-        tools:text="+380683111845" />
-
-    <TextView
-        android:id="@+id/how_old"
+        android:id="@+id/age"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/buttons_container"
-        android:layout_below="@+id/phone"
+        android:layout_below="@+id/type_of_celebration"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/colorAccent"
         android:gravity="center"
-        android:textSize="200sp"
+        android:textColor="@color/colorAccent"
+        android:textSize="150sp"
         tools:text="34" />
 
     <LinearLayout
@@ -66,28 +49,33 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/call_btn"
+            style="@style/ButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/call"
-            style="@style/ButtonsStyle" />
+            android:layout_weight="1"
+            android:text="@string/call" />
 
         <Button
             android:id="@+id/sms_btn"
+            style="@style/ButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ButtonsStyle"
+            android:layout_marginStart="@dimen/value_8dp"
+            android:layout_marginEnd="@dimen/value_8dp"
+            android:layout_weight="1"
             android:text="@string/sms" />
 
         <Button
             android:id="@+id/close_btn"
+            style="@style/ButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ButtonsStyle"
+            android:layout_weight="1"
             android:text="@string/close" />
     </LinearLayout>
+
 </RelativeLayout>

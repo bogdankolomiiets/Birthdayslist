@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Event reminder</string>
+    <string name="app_name" translatable="false">Event reminder</string>
     <string name="file_name" translatable="false">Birthday reminder</string>
     <string name="new_event">New event</string>
     <string name="add">Add</string>
@@ -49,6 +49,7 @@
     <string name="import_into_database">Import into database</string>
     <string name="service_name" translatable="false">Celebration service</string>
     <string name="file_saved">File saved to:</string>
+    <string name="saved">Changes saved</string>
     <string name="no_data_to_save">No data to save</string>
     <string name="exported">entries exported</string>
     <string name="imported_successful">Import successful</string>
@@ -59,5 +60,7 @@
     <string name="cellphone_image" translatable="false">cellphone image</string>
     <string name="ok" translatable="false">OK</string>
     <string name="age">Age:</string>
+    <string name="event_search_in_progress">Event search in progress</string>
+    <string name="external_storage_not_available">External storage not available</string>
 
 </resources>

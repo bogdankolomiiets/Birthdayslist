@@ -22,9 +22,9 @@ interface EventsDao {
     fun updateEvent(event: Event)
 
     @Query("SELECT * FROM $TABLE_NAME ORDER BY $EVENT_NAME")
-    fun getEvents(): LiveData<List<Event>>
+    fun getEvents(): List<Event>
 
-    @Query("SELECT * FROM $TABLE_NAME WHERE $EVENT_NAME LIKE :eventName")
+    @Query("SELECT * FROM $TABLE_NAME WHERE $EVENT_NAME LIKE :eventName ORDER BY $EVENT_NAME")
     fun getEvents(eventName: String): LiveData<List<Event>>
 
     @Query("SELECT * FROM $TABLE_NAME WHERE $EVENT_MONTH == :month and $EVENT_DAY == :day")

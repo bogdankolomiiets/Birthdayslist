@@ -51,5 +51,6 @@
     <string name="undefined">Не определено</string>
     <string name="no_events">Нет данных для отображения</string>
     <string name="age">Возраст:</string>
+    <string name="saved">Изменения сохранены</string>
 
 </resources>

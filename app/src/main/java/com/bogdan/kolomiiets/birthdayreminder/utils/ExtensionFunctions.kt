@@ -1,10 +1,12 @@
 package com.bogdan.kolomiiets.birthdayreminder.utils
 
+import android.os.Environment
 import android.widget.TextView
 import com.bogdan.kolomiiets.birthdayreminder.R
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar.*
+
 
 private val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 private val calendar = getInstance()
@@ -35,5 +37,15 @@ fun TextView.calculateAge(eventYear: Int, eventMonth: Int, eventDate: Int) {
             }
         }
     }
-    text = if (yearsOld > 0) yearsOld.toString() else ""
+    text = yearsOld.toString()
+}
+
+fun isExternalStorageReadOnly(): Boolean {
+    val extStorageState: String = Environment.getExternalStorageState()
+    return Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)
+}
+
+fun isExternalStorageAvailable(): Boolean {
+    val extStorageState: String = Environment.getExternalStorageState()
+    return Environment.MEDIA_MOUNTED.equals(extStorageState)
 }
