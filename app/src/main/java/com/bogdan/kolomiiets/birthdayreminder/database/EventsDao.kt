@@ -2,12 +2,13 @@ package com.bogdan.kolomiiets.birthdayreminder.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_MONTH
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_DAY
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_ID
+import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_MONTH
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_NAME
 import com.bogdan.kolomiiets.birthdayreminder.database.DatabaseConstants.Companion.TABLE_NAME
 import com.bogdan.kolomiiets.birthdayreminder.models.Event
+import io.reactivex.Single
 
 @Dao
 interface EventsDao {
@@ -22,7 +23,7 @@ interface EventsDao {
     fun updateEvent(event: Event)
 
     @Query("SELECT * FROM $TABLE_NAME ORDER BY $EVENT_NAME")
-    fun getEvents(): List<Event>
+    fun getEvents(): Single<List<Event>>
 
     @Query("SELECT * FROM $TABLE_NAME WHERE $EVENT_NAME LIKE :eventName ORDER BY $EVENT_NAME")
     fun getEvents(eventName: String): LiveData<List<Event>>

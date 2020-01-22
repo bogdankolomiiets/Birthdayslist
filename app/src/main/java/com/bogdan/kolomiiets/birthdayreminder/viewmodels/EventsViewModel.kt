@@ -6,7 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.bogdan.kolomiiets.birthdayreminder.models.Event
 import com.bogdan.kolomiiets.birthdayreminder.repository.StorageProvider
-import io.reactivex.Observable
+import io.reactivex.Single
 
 class EventsViewModel : ViewModel() {
     private val storageProvider = StorageProvider()
@@ -21,7 +21,11 @@ class EventsViewModel : ViewModel() {
         storageProvider.deleteEvent(eventId)
     }
 
-    fun getEvents(): Observable<List<Event>> {
+    fun getEvents(): Single<List<Event>> {
         return storageProvider.getEvents()
+    }
+
+    fun insertEvents(events: List<Event>) {
+        storageProvider.insertEvents(events)
     }
 }

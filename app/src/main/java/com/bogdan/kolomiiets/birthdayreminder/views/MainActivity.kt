@@ -2,12 +2,16 @@ package com.bogdan.kolomiiets.birthdayreminder.views
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -35,33 +39,38 @@ import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.REMINDER_MINUT
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.REMINDER_ON_OFF
 import com.bogdan.kolomiiets.birthdayreminder.R
 import com.bogdan.kolomiiets.birthdayreminder.RequestCodes
+import com.bogdan.kolomiiets.birthdayreminder.RequestCodes.Companion.INTENT_ACTION_GET_CONTENT
 import com.bogdan.kolomiiets.birthdayreminder.RequestCodes.Companion.REQUEST_READ_EXTERNAL_STORAGE_FOR_IMPORT
 import com.bogdan.kolomiiets.birthdayreminder.RequestCodes.Companion.REQUEST_WRITE_EXTERNAL_STORAGE_FOR_EXPORT
 import com.bogdan.kolomiiets.birthdayreminder.adapters.EventsRecyclerViewAdapter
 import com.bogdan.kolomiiets.birthdayreminder.models.Event
-import com.bogdan.kolomiiets.birthdayreminder.utils.OnPopUpMenuItemClick
-import com.bogdan.kolomiiets.birthdayreminder.utils.WhoCelebrateService
-import com.bogdan.kolomiiets.birthdayreminder.utils.isExternalStorageAvailable
-import com.bogdan.kolomiiets.birthdayreminder.utils.isExternalStorageReadOnly
+import com.bogdan.kolomiiets.birthdayreminder.utils.*
 import com.bogdan.kolomiiets.birthdayreminder.viewmodels.EventsViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
-import io.reactivex.*
-import io.reactivex.Observable
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import java.lang.Exception
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import org.json.JSONArray
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.lang.reflect.Type
 import java.util.*
+import java.util.concurrent.Executors
 
-class MainActivity: AppCompatActivity(), View.OnClickListener, OnPopUpMenuItemClick{
+class MainActivity : AppCompatActivity(), View.OnClickListener, OnPopUpMenuItemClick {
     private lateinit var newEventFab: FloatingActionButton
     private lateinit var noEvents: TextView
     private lateinit var eventViewModel: EventsViewModel
     private lateinit var eventRecyclerView: RecyclerView
     private lateinit var eventsRecyclerViewAdapter: EventsRecyclerViewAdapter
     private lateinit var searchView: SearchView
+    private lateinit var disposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,35 +131,92 @@ class MainActivity: AppCompatActivity(), View.OnClickListener, OnPopUpMenuItemCl
         when (item.itemId) {
             R.id.item_about -> showAboutDialog()
             R.id.item_export_to_file -> exportToFile()
-            R.id.item_import_into_database -> importDataIntoDatabase()
+            R.id.item_import_into_database -> pickContentForImport()
             R.id.item_settings -> startActivity(Intent(this, SettingsActivity::class.java))
         }
         return true
     }
 
-    private fun exportToFile() {
-        if (PermissionChecker.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
-            if (isExternalStorageAvailable() and !isExternalStorageReadOnly()) {
-                val single = Single.fromCallable { eventViewModel.getEvents() }
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnError { Toast.makeText(this@MainActivity, it.message, Toast.LENGTH_LONG).show() }
-                        .doOnSuccess {
-                            println("doOnSuccess")
-                            val eventJsonArray = Gson().toJson(it, Event::class.java)
-                            println(eventJsonArray)
-                        }
-            } else Toast.makeText(this, R.string.external_storage_not_available, Toast.LENGTH_LONG).show()
+    private fun exportToFile() =
+            if (PermissionChecker.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
+                if (isExternalStorageAvailable() and !isExternalStorageReadOnly()) {
+                    disposable = eventViewModel.getEvents()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ eventsList ->
+                                try {
+                                    val jsonElement = GsonBuilder().create().toJsonTree(eventsList)
+                                    val filename = getString(R.string.file_name, getStringDate())
+
+                                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                                        val path = File(Environment.getExternalStorageDirectory().absolutePath.plus(File.separator).plus(getString(R.string.app_name)))
+                                        path.mkdir()
+                                        val file = File(path, filename)
+                                        file.createNewFile()
+                                        FileOutputStream(file).use { fileOutputStream ->
+                                            fileOutputStream.write(jsonElement.toString().toByteArray())
+                                            fileOutputStream.flush()
+                                            fileOutputStream.close()
+                                            showToast(getString(R.string.exported_successfully, file))
+                                        }
+                                    } else {
+                                        val volume = MediaStore.VOLUME_EXTERNAL_PRIMARY
+                                        val uriExternal = MediaStore.Files.getContentUri(volume)
+                                        val contentResolver = contentResolver
+                                        val contentValues = ContentValues()
+                                        contentValues.put(MediaStore.Files.FileColumns.MIME_TYPE, "json")
+                                        contentValues.put(MediaStore.Files.FileColumns.RELATIVE_PATH, getString(R.string.app_name))
+                                        contentValues.put(MediaStore.Files.FileColumns.DISPLAY_NAME, filename)
+                                        val result = contentResolver.insert(uriExternal, contentValues)
+                                        result?.path?.let { showToast(it) }
+                                    }
+                                } catch (ex: Exception) {
+                                    showToast(ex.message ?: ex.toString())
+                                }
+                            }, { error: Throwable? -> showToast(error?.message ?: error.toString()) })
+                } else Toast.makeText(this, R.string.external_storage_not_available, Toast.LENGTH_LONG).show()
+            } else {
+                ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), REQUEST_WRITE_EXTERNAL_STORAGE_FOR_EXPORT)
+            }
+
+    private fun pickContentForImport() {
+        if (PermissionChecker.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "*/*"
+            if (intent.resolveActivity(packageManager) != null) {
+                showToast(getString(R.string.select_a_file_for_import))
+                startActivityForResult(intent, INTENT_ACTION_GET_CONTENT)
+            }
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), REQUEST_WRITE_EXTERNAL_STORAGE_FOR_EXPORT)
+            ActivityCompat.requestPermissions(this, arrayOf(READ_EXTERNAL_STORAGE), REQUEST_READ_EXTERNAL_STORAGE_FOR_IMPORT)
         }
     }
 
-    private fun importDataIntoDatabase() {
-        if (PermissionChecker.checkSelfPermission(this, READ_EXTERNAL_STORAGE) == PermissionChecker.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Import", Toast.LENGTH_LONG).show()
-        } else {
-            ActivityCompat.requestPermissions(this, arrayOf(READ_EXTERNAL_STORAGE), REQUEST_READ_EXTERNAL_STORAGE_FOR_IMPORT)
+    private fun executeImportDataIntoDatabase(resultIntent: Intent?) {
+        resultIntent?.data?.let {
+            Executors.newSingleThreadExecutor().execute {
+                val stringBuilder = StringBuilder()
+                contentResolver.openInputStream(it).use { inputStream: InputStream? -> inputStream?.bufferedReader()?.forEachLine { line -> stringBuilder.append(line) } }
+
+                /**
+                 * working code
+                 * version 1
+                 */
+                /*val jsonArray = JSONArray(stringBuilder.toString())
+                val events = mutableListOf<Event>()
+                for (i in 0 until jsonArray.length()) {
+                    events.add(Gson().fromJson(jsonArray[i].toString(), Event::class.java))
+                }*/
+
+                /**
+                 * working code
+                 * version 2
+                 */
+                val events = Gson().fromJson<List<Event>>(stringBuilder.toString(), object : TypeToken<List<Event>>() {}.type)
+                if (events.isNotEmpty()) {
+                    eventViewModel.insertEvents(events)
+                }
+            }
         }
     }
 
@@ -207,18 +273,29 @@ class MainActivity: AppCompatActivity(), View.OnClickListener, OnPopUpMenuItemCl
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (grantResults.isNotEmpty() and (grantResults[0] == PermissionChecker.PERMISSION_GRANTED)) {
+            when (requestCode) {
+                REQUEST_READ_EXTERNAL_STORAGE_FOR_IMPORT -> pickContentForImport()
+                REQUEST_WRITE_EXTERNAL_STORAGE_FOR_EXPORT -> exportToFile()
+            }
+        } else super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
-            REQUEST_READ_EXTERNAL_STORAGE_FOR_IMPORT -> {
-                if (grantResults.isNotEmpty() and (grantResults[0] == PermissionChecker.PERMISSION_GRANTED)) {
-                    importDataIntoDatabase()
-                }
-            }
-            REQUEST_WRITE_EXTERNAL_STORAGE_FOR_EXPORT -> {
-                if (grantResults.isNotEmpty() and (grantResults[0] == PermissionChecker.PERMISSION_GRANTED)) {
-                    exportToFile()
-                }
-            }
-            else -> super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            INTENT_ACTION_GET_CONTENT -> if (resultCode == Activity.RESULT_OK) executeImportDataIntoDatabase(data)
+            else -> super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!::disposable.isInitialized.and(!disposable.isDisposed)) {
+            disposable.dispose()
+        }
+    }
+
+    fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }

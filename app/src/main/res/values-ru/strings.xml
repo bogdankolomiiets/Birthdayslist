@@ -52,5 +52,8 @@
     <string name="no_events">Нет данных для отображения</string>
     <string name="age">Возраст:</string>
     <string name="saved">Изменения сохранены</string>
+    <string name="select_a_file_for_import">Выберите файл для импорта</string>
+    <string name="exported_successfully">Экспортировано успешно в %s</string>
+    <string name="external_storage_not_available">Внешнее хранилище не доступно</string>
 
 </resources>

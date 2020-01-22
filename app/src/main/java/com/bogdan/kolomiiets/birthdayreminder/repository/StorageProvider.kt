@@ -5,7 +5,7 @@ import com.bogdan.kolomiiets.birthdayreminder.BirthdayApp
 import com.bogdan.kolomiiets.birthdayreminder.database.EventsDao
 import com.bogdan.kolomiiets.birthdayreminder.database.EventsDatabase
 import com.bogdan.kolomiiets.birthdayreminder.models.Event
-import io.reactivex.Observable
+import io.reactivex.Single
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -16,6 +16,10 @@ class StorageProvider {
         Executors.newSingleThreadExecutor().execute {eventsDao.insertEvent(event)}
     }
 
+    fun insertEvents(events: List<Event>) {
+        events.forEach { eventsDao.insertEvent(it) }
+    }
+
     fun deleteEvent(eventId: Int){
         Executors.newSingleThreadExecutor().execute {eventsDao.deleteEvent(eventId)}
     }
@@ -24,8 +28,8 @@ class StorageProvider {
         Executors.newSingleThreadExecutor().execute {eventsDao.updateEvent(event)}
     }
 
-    fun getEvents(): Observable<List<Event>> {
-        return Observable.fromPublisher<List<Event>> { eventsDao.getEvents() }
+    fun getEvents(): Single<List<Event>> {
+        return eventsDao.getEvents()
     }
 
     fun getEvents(eventName: String): LiveData<List<Event>> {

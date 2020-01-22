@@ -41,11 +41,14 @@ fun TextView.calculateAge(eventYear: Int, eventMonth: Int, eventDate: Int) {
 }
 
 fun isExternalStorageReadOnly(): Boolean {
-    val extStorageState: String = Environment.getExternalStorageState()
-    return Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)
+    return Environment.MEDIA_MOUNTED_READ_ONLY == Environment.getExternalStorageState()
 }
 
 fun isExternalStorageAvailable(): Boolean {
-    val extStorageState: String = Environment.getExternalStorageState()
-    return Environment.MEDIA_MOUNTED.equals(extStorageState)
+    return Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()
+}
+
+fun getStringDate(): String {
+    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    return sdf.format(calendarNow.time)
 }

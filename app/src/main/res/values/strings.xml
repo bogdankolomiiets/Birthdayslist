@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Event reminder</string>
-    <string name="file_name" translatable="false">Birthday reminder</string>
+    <string name="file_name" translatable="false">Events %s.json</string>
     <string name="new_event">New event</string>
     <string name="add">Add</string>
     <string name="close">Close</string>
@@ -62,5 +62,7 @@
     <string name="age">Age:</string>
     <string name="event_search_in_progress">Event search in progress</string>
     <string name="external_storage_not_available">External storage not available</string>
+    <string name="exported_successfully">Exported successfully to %s</string>
+    <string name="select_a_file_for_import">Select a file for import</string>
 
 </resources>
