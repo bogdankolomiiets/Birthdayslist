@@ -1,29 +1,28 @@
 package com.bogdan.kolomiiets.birthdayreminder.views
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.RadioGroup
+import android.widget.Switch
+import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import com.bogdan.kolomiiets.birthdayreminder.Constants
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.CHECKED_RADIO
+import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.IS_REMINDER_ON
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.RADIO_SAME_DAY
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.RADIO_THE_DAY_BEFORE
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.RADIO_TWO_DAYS_BEFORE
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.REMINDER_HOUR
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.REMINDER_MINUTE
-import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.REMINDER_ON_OFF
 import com.bogdan.kolomiiets.birthdayreminder.R
-import com.bogdan.kolomiiets.birthdayreminder.RequestCodes
-import com.bogdan.kolomiiets.birthdayreminder.utils.WhoCelebrateService
-import java.lang.Exception
+import com.bogdan.kolomiiets.birthdayreminder.utils.setEveryDayAlarm
+import com.bogdan.kolomiiets.birthdayreminder.utils.showToast
 import java.util.*
 
 class SettingsActivity: AppCompatActivity(), View.OnClickListener {
@@ -51,7 +50,7 @@ class SettingsActivity: AppCompatActivity(), View.OnClickListener {
 
         preferences = getSharedPreferences(Constants.PREFERENCES_NAME, Context.MODE_PRIVATE)
 
-        reminderOnOff.isChecked = preferences.getBoolean(REMINDER_ON_OFF, false)
+        reminderOnOff.isChecked = preferences.getBoolean(IS_REMINDER_ON, false)
         if (!reminderOnOff.isChecked) {
             enableUiComponents(false)
         }
@@ -71,57 +70,38 @@ class SettingsActivity: AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    override fun onClick(p0: View?) {
+    override fun onClick(view: View?) {
         try {
             //Save settings into SharedPreferences
             val editor = preferences.edit()
-            editor.putBoolean(REMINDER_ON_OFF, reminderOnOff.isChecked)
+            editor.putBoolean(IS_REMINDER_ON, reminderOnOff.isChecked)
+
             editor.putInt(CHECKED_RADIO, when (radioGroupContainer.checkedRadioButtonId) {
                 R.id.radio_the_day_before -> RADIO_THE_DAY_BEFORE
                 R.id.radio_two_days_before -> RADIO_TWO_DAYS_BEFORE
                 else -> RADIO_SAME_DAY
             })
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                editor.putInt(REMINDER_HOUR, reminderTimePicker.hour)
-                editor.putInt(REMINDER_MINUTE, reminderTimePicker.minute)
-            } else {
-                editor.putInt(REMINDER_HOUR, reminderTimePicker.currentHour)
-                editor.putInt(REMINDER_MINUTE, reminderTimePicker.currentMinute)
-            }
+
+            val tempHour = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                reminderTimePicker.hour else reminderTimePicker.currentHour
+            editor.putInt(REMINDER_HOUR, tempHour)
+
+            val tempMinute = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                reminderTimePicker.minute else reminderTimePicker.currentMinute
+            editor.putInt(REMINDER_MINUTE, tempMinute)
 
             editor.apply()
 
-            setAlarm(reminderOnOff.isChecked)
-            Toast.makeText(this, R.string.saved, Toast.LENGTH_LONG).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
-        }
-    }
+            setEveryDayAlarm(this, tempHour, tempMinute, reminderOnOff.isChecked)
 
-    private fun setAlarm(needToRemind: Boolean) {
-        try {
-            val intent = Intent(applicationContext, WhoCelebrateService::class.java)
-            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                PendingIntent.getForegroundService(this, RequestCodes.PENDING_INTENT_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            } else {
-                PendingIntent.getService(this, RequestCodes.PENDING_INTENT_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            }
-            if (!needToRemind) {
-                alarmManager.cancel(pendingIntent)
-            } else {
-                val calendar = Calendar.getInstance()
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    calendar.set(Calendar.HOUR, reminderTimePicker.hour)
-                    calendar.set(Calendar.MINUTE, reminderTimePicker.minute)
-                } else {
-                    calendar.set(Calendar.HOUR, reminderTimePicker.currentHour)
-                    calendar.set(Calendar.MINUTE, reminderTimePicker.currentMinute)
-                }
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
-            }
+            getSharedPreferences(Constants.PREFERENCES_EVENTS_NOTIFIER, Context.MODE_PRIVATE)
+                    .edit()
+                    .clear()
+                    .apply()
+
+            showToast(R.string.saved)
         } catch (e: Exception) {
-            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            showToast(e.message ?: e.toString())
         }
     }
 

@@ -1,25 +1,28 @@
 package com.bogdan.kolomiiets.birthdayreminder.models
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_DAY
-import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_ID
-import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_MONTH
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_NAME
-import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.EVENT_YEAR
 import com.bogdan.kolomiiets.birthdayreminder.database.DatabaseConstants.Companion.TABLE_NAME
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = TABLE_NAME)
+@Entity(tableName = TABLE_NAME, indices = [Index(EVENT_NAME, unique = true)])
 data class Event(
         @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = EVENT_ID) val id: Int = 0,
-        @ColumnInfo(name = EVENT_NAME) var name: String = "",
+        val _id: Int = 0,
+        var name: String = "",
         var phone: String = "",
         var type: Int = 0,
-        @ColumnInfo(name = EVENT_YEAR) var year: Int = 0,
-        @ColumnInfo(name = EVENT_MONTH) var month: Int = 0,
-        @ColumnInfo(name = EVENT_DAY) var day: Int = 0) : Parcelable
+        var celebration_year: Int = 0,
+        var celebration_month: Int = 0,
+        var celebration_day: Int = 0) : Parcelable {
+
+        companion object {
+                const val TYPE_BIRTHDAY = 1
+                const val TYPE_ANNIVERSARY = 2
+                const val TYPE_HOLIDAY = 3
+        }
+}

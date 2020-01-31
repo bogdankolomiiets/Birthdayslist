@@ -10,11 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/adView"
-        android:paddingStart="@dimen/value_4dp"
-        android:paddingEnd="@dimen/value_4dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:paddingStart="@dimen/value_4dp"
+        android:paddingEnd="@dimen/value_4dp" />
 
     <TextView
         android:id="@+id/no_events"
@@ -33,10 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/adView"
-        android:background="@color/colorAccent"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/value_40dp"
-        android:layout_marginBottom="@dimen/value_30dp"
+        android:layout_marginBottom="@dimen/value_16dp"
+        android:background="@color/colorAccent"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add"
@@ -44,12 +44,11 @@
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/ad_mob_id" />
+        ads:adUnitId="@string/admob_id_test" />
 
 </RelativeLayout>

@@ -45,7 +45,7 @@ class NotificationDetail: AppCompatActivity(), View.OnClickListener {
         event?.let {
             personName.text = it.name
             typeOfCelebration.convertIntTypeToString(it.type)
-            age.calculateAge(it.year, it.month, it.day)
+            age.calculateAge(it.celebration_year, it.celebration_month, it.celebration_day)
         }
 
         //if event doesn't have phone

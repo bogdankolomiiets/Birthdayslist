@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "775018277252",
+    "firebase_url": "https://birthdayreminder-2e8d6.firebaseio.com",
+    "project_id": "birthdayreminder-2e8d6",
+    "storage_bucket": "birthdayreminder-2e8d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775018277252:android:4ba1e3b005a7b1990395d1",
+        "android_client_info": {
+          "package_name": "com.bogdan.kolomiiets.birthdayreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775018277252-epphp982kbc5ln3ir4077q5acidj9e3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bogdan.kolomiiets.birthdayreminder",
+            "certificate_hash": "e64213503ab9d7837ec15f91d8889b7abfa689d6"
+          }
+        },
+        {
+          "client_id": "775018277252-4pedkjfuvu3m98qt14ak6oun34a3cll8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaxzX5UHxXrp8bPtfMjOmAU6La1Lvhf-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775018277252-4pedkjfuvu3m98qt14ak6oun34a3cll8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

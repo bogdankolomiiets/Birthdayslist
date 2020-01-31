@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Нагадування подій</string>
+    <string name="new_event">Нова подія</string>
+    <string name="close">Закрити</string>
+    <string name="birthday">День народження</string>
+    <string name="name">Ім’я</string>
+    <string name="event_date">Дата події</string>
+    <string name="phone_number">Номер телефону (опціонально)</string>
+    <string name="about_the_program">Про програму</string>
+    <string name="settings">Налаштування</string>
+    <string name="event_type">Тип події</string>
+    <string name="anniversary">Річниця</string>
+    <string name="holiday">Свято</string>
+    <string name="about_message">Програма дозволяє створити список днів народжень, річниць, державних або церковних свят і буде нагадувати Вам про них в заданий час, щоб ніхто з ваших друзів або близьких не залишився без уваги.</string>
+    <string name="change">Змінити</string>
+    <string name="delete">Видалити</string>
+    <string name="save">Зберегти</string>
+    <string name="today_celebrate">Подія сьогодні</string>
+    <string name="tomorrow_will_celebrate">Подія завтра</string>
+    <string name="after_tomorrow_will_celebrate">Подія післязавтра</string>
+    <string name="switch_reminder">Увімкнути нагадування" "</string>
+    <string name="remind_on_same_day">нагадати в день події</string>
+    <string name="remind_the_day_before">нагадати за день</string>
+    <string name="remind_2_days_before">нагадати за 2 дні</string>
+    <string name="reminder_time">Час нагадування:</string>
+    <string name="call">ЗАТЕЛЕФОНУВАТИ</string>
+    <string name="sms">ВІДПРАВИТИ SMS</string>
+    <string name="search">Пошук</string>
+    <string name="export_to_file">Експортувати в файл</string>
+    <string name="import_into_database">Імпортувати до програми</string>
+    <string name="saved">Зміни збережено</string>
+    <string name="undefined">Не визначено</string>
+    <string name="no_events">Відсутні дані для відображення</string>
+    <string name="age">Вік:</string>
+    <string name="event_search_in_progress">Виконується пошук подій</string>
+    <string name="external_storage_not_available">Зовнішній носій недоступний</string>
+    <string name="select_a_file_for_import">Оберіть файл для імпорту</string>
+    <string name="nothing_to_import">Нічого імпортувати</string>
+    <string name="enter_name">Вкажіть ім’я</string>
+</resources>

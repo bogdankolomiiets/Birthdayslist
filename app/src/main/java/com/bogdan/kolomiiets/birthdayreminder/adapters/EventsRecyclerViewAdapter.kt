@@ -3,12 +3,14 @@ package com.bogdan.kolomiiets.birthdayreminder.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bogdan.kolomiiets.birthdayreminder.R
 import com.bogdan.kolomiiets.birthdayreminder.models.Event
+import com.bogdan.kolomiiets.birthdayreminder.models.Event.Companion.TYPE_HOLIDAY
 import com.bogdan.kolomiiets.birthdayreminder.utils.OnPopUpMenuItemClick
 import com.bogdan.kolomiiets.birthdayreminder.utils.calculateAge
 import com.bogdan.kolomiiets.birthdayreminder.utils.convertEventDateToString
@@ -31,15 +33,20 @@ class EventsRecyclerViewAdapter(private val onPopUpMenuItemClick: OnPopUpMenuIte
         holder.phone.text = event.phone
         holder.phone.isVisible = event.phone.isNotEmpty()
         holder.type.convertIntTypeToString(event.type)
-        holder.age.calculateAge(event.year, event.month, event.day)
-        holder.ageTitle.isVisible = holder.age.text.isNotEmpty()
-        holder.date.convertEventDateToString(event.year, event.month, event.day)
+
+        if (event.type != TYPE_HOLIDAY) {
+            holder.age.calculateAge(event.celebration_year, event.celebration_month, event.celebration_day)
+        }
+
+        holder.ageContainer.isVisible = event.type != TYPE_HOLIDAY
+        holder.date.convertEventDateToString(event.celebration_year, event.celebration_month, event.celebration_day, event.type == TYPE_HOLIDAY)
+
         holder.verticalMenu.setOnClickListener {
             val popupMenu = PopupMenu(holder.itemView.context, it)
             popupMenu.inflate(R.menu.popup_menu)
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
-                    R.id.deleteItem -> onPopUpMenuItemClick.deleteItemClick(event.id)
+                    R.id.deleteItem -> onPopUpMenuItemClick.deleteItemClick(event._id)
                     R.id.changeItem -> onPopUpMenuItemClick.changeItemClick(event)
                 }
                 return@setOnMenuItemClickListener true
@@ -72,7 +79,7 @@ class EventsRecyclerViewAdapter(private val onPopUpMenuItemClick: OnPopUpMenuIte
         val phone: TextView = view.findViewById(R.id.phone)
         val type: TextView = view.findViewById(R.id.type)
         val date: TextView = view.findViewById(R.id.date)
-        val ageTitle: TextView = view.findViewById(R.id.age_title)
+        val ageContainer: LinearLayout = view.findViewById(R.id.age_container)
         val age: TextView = view.findViewById(R.id.age)
         val verticalMenu: TextView = view.findViewById(R.id.vertical_menu)
     }

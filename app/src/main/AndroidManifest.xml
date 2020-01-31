@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".BirthdayApp"
+        android:name=".EventReminderApp"
         android:theme="@style/AppTheme">
 
         <activity
@@ -59,7 +59,8 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8123334718162410~4155812837" />
+            android:value="ca-app-pub-8123334718162410~4155812837"/>
+
     </application>
 
 </manifest>

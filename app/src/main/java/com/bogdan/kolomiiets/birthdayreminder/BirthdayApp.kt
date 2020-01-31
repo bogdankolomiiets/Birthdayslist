@@ -1,13 +1,13 @@
 package com.bogdan.kolomiiets.birthdayreminder
 
-import android.app.Application
 import android.content.Context
+import androidx.multidex.MultiDexApplication
 
-class BirthdayApp: Application() {
+class EventReminderApp: MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        context = applicationContext
+        context = this.applicationContext
     }
 
     companion object {

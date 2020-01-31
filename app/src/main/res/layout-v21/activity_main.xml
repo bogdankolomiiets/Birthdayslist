@@ -16,7 +16,7 @@
         android:paddingStart="@dimen/value_4dp"
         android:paddingEnd="@dimen/value_4dp"
         tools:itemCount="10"
-        tools:listitem="@layout/single_event_item"/>
+        tools:listitem="@layout/single_event_item" />
 
     <TextView
         android:id="@+id/no_events"
@@ -37,22 +37,21 @@
         android:layout_above="@+id/adView"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/value_40dp"
-        android:layout_marginBottom="@dimen/value_30dp"
+        android:layout_marginBottom="@dimen/value_16dp"
         android:background="@color/colorAccent"
         android:clickable="true"
+        android:elevation="@dimen/value_4dp"
         android:focusable="true"
         android:src="@drawable/ic_add"
-        android:elevation="@dimen/value_4dp"
         app:fabSize="normal" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/ad_mob_id" />
+        ads:adUnitId="@string/admob_id_test" />
 
 </RelativeLayout>

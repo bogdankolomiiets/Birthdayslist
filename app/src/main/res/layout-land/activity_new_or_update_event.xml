@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/constraint_layout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -96,7 +97,7 @@
         style="@style/TextViewTitleStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/date_of_celebration"
+        android:text="@string/event_date"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/date_picker"
@@ -111,7 +112,8 @@
         android:calendarViewShown="false"
         android:datePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_date_title" />
+        app:layout_constraintTop_toBottomOf="@+id/select_date_title"
+        tools:targetApi="LOLLIPOP" />
 
     <Button
         android:id="@+id/save_btn"

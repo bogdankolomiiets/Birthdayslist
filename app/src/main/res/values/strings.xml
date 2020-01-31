@@ -1,14 +1,11 @@
 <resources>
-    <string name="app_name" translatable="false">Event reminder</string>
-    <string name="file_name" translatable="false">Events %s.json</string>
+    <string name="app_name">Event reminder</string>
+    <string name="file_name" translatable="false">Events %s.dat</string>
     <string name="new_event">New event</string>
-    <string name="add">Add</string>
     <string name="close">Close</string>
     <string name="birthday">Birthday</string>
     <string name="name">Name</string>
-    <string name="holiday_name">Holiday name</string>
-    <string name="error">Error</string>
-    <string name="date_of_celebration">Date of celebration</string>
+    <string name="event_date">Event date</string>
     <string name="phone_number">Phone number (optional)</string>
     <string name="about_the_program">About the program</string>
     <string name="settings">Settings</string>
@@ -16,26 +13,17 @@
     <string name="anniversary">Anniversary</string>
     <string name="holiday">Holiday</string>
     <string name="about_message">The program allows you to create a list of birthdays, anniversaries, state or church holidays and will remind you of them at a specified time. So, nobody of your relatives or friends will not be ignored.</string>
-    <string name="my_email">Best regards:\nbogdan.kolomiiets@gmail.com</string>
-    <string name="no_select_contact">You did\'t select a contact</string>
-    <string name="added_successful">Added successful</string>
     <string name="change">Change</string>
     <string name="delete">Delete</string>
-    <string name="select_an_action">Select an action</string>
-    <string name="cancel">Cancel</string>
     <string name="save">Save</string>
-    <string name="are_you_sure">Are you sure?</string>
-    <string name="positive_answer">YES</string>
-    <string name="negative_answer">NO</string>
-    <string name="really_delete">Delete the date for:</string>
-    <string name="updated">Data updated successfully</string>
     <string name="today_celebrate">Today celebrate</string>
     <string name="tomorrow_will_celebrate">Tomorrow will celebrate</string>
     <string name="after_tomorrow_will_celebrate">After tomorrow will celebrate</string>
-    <string name="empty">Enter the name</string>
-    <string name="app_id" translatable="false">ca-app-pub-8123334718162410~4155812837</string>
-    <string name="ad_mob_id" translatable="false">ca-app-pub-8123334718162410/7021649320</string>
-    <string name="ad_mob_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-8123334718162410~4155812837</string>
+    <string name="admob_main_activity_banner_id" translatable="false">ca-app-pub-8123334718162410/7021649320</string>
+    <string name="admob_interstitialAd_id" translatable="false">ca-app-pub-8123334718162410/4114864477</string>
+    <string name="admob_test_interstitialAd_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="admob_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="switch_reminder">Enable reminder" "</string>
     <string name="remind_on_same_day">remind on the same day</string>
     <string name="remind_the_day_before">remind the day before</string>
@@ -43,26 +31,19 @@
     <string name="reminder_time">Reminder time:</string>
     <string name="call">CALL</string>
     <string name="sms">SEND SMS</string>
-    <string name="years_old">years old:</string>
     <string name="search">Search</string>
     <string name="export_to_file">Export to file</string>
     <string name="import_into_database">Import into database</string>
     <string name="service_name" translatable="false">Celebration service</string>
-    <string name="file_saved">File saved to:</string>
     <string name="saved">Changes saved</string>
-    <string name="no_data_to_save">No data to save</string>
-    <string name="exported">entries exported</string>
-    <string name="imported_successful">Import successful</string>
-    <string name="not_imported">Something went wrong. Data not imported</string>
     <string name="undefined">Undefined</string>
     <string name="pick_contact_btn_description" translatable="false">Pick contact button</string>
     <string name="no_events">No events</string>
-    <string name="cellphone_image" translatable="false">cellphone image</string>
     <string name="ok" translatable="false">OK</string>
     <string name="age">Age:</string>
     <string name="event_search_in_progress">Event search in progress</string>
     <string name="external_storage_not_available">External storage not available</string>
-    <string name="exported_successfully">Exported successfully to %s</string>
     <string name="select_a_file_for_import">Select a file for import</string>
-
+    <string name="nothing_to_import">Nothing to import</string>
+    <string name="enter_name">Enter name</string>
 </resources>

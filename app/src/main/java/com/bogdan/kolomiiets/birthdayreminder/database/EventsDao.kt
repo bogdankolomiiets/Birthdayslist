@@ -29,5 +29,5 @@ interface EventsDao {
     fun getEvents(eventName: String): LiveData<List<Event>>
 
     @Query("SELECT * FROM $TABLE_NAME WHERE $EVENT_MONTH == :month and $EVENT_DAY == :day")
-    fun getEventsOnToday(month: Int, day: Int): List<Event>
+    fun getEventsOnDate(month: Int, day: Int): List<Event>
 }
