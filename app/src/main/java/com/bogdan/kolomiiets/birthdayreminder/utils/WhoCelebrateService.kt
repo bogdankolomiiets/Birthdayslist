@@ -25,7 +25,6 @@ class WhoCelebrateService : IntentService(Context.ALARM_SERVICE) {
 
     override fun onCreate() {
         super.onCreate()
-
         val foregroundNotification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText(getString(R.string.event_search_in_progress))
@@ -35,6 +34,7 @@ class WhoCelebrateService : IntentService(Context.ALARM_SERVICE) {
     }
 
     override fun onHandleIntent(p0: Intent?) {
+
         val calendar = Calendar.getInstance()
 
         val eventsNotifierPreferences = getSharedPreferences(PREFERENCES_EVENTS_NOTIFIER, Context.MODE_PRIVATE)

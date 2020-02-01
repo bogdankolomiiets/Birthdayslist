@@ -4,11 +4,11 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Environment
 import android.widget.Toast
 import com.bogdan.kolomiiets.birthdayreminder.EventReminderApp
 import com.bogdan.kolomiiets.birthdayreminder.RequestCodes.Companion.PENDING_INTENT_REQUEST_CODE
+import com.bogdan.kolomiiets.birthdayreminder.receivers.AlarmReceiver
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,22 +37,18 @@ fun showToast(resId: Int) {
 
 fun setEveryDayAlarm(context: Context, alarmHour: Int, alarmMinute: Int, isAlarmOn: Boolean) {
     try {
-        val intent = Intent(context, WhoCelebrateService::class.java)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            PendingIntent.getForegroundService(context, PENDING_INTENT_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-        } else {
-            PendingIntent.getService(context, PENDING_INTENT_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-        }
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, PENDING_INTENT_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         if (!isAlarmOn) {
             alarmManager.cancel(pendingIntent)
         } else {
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.HOUR_OF_DAY, alarmHour)
-            calendar.set(Calendar.MINUTE, alarmMinute)
-
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+            val calendar = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, alarmHour)
+                set(Calendar.MINUTE, alarmMinute)
+            }
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
         }
     } catch (e: Exception) {
         showToast(e.message ?: e.toString())

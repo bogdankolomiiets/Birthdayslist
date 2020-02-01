@@ -100,6 +100,7 @@ class SettingsActivity: AppCompatActivity(), View.OnClickListener {
                     .apply()
 
             showToast(R.string.saved)
+            finish()
         } catch (e: Exception) {
             showToast(e.message ?: e.toString())
         }

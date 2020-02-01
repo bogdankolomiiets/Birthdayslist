@@ -195,6 +195,9 @@ class NewOrUpdateEventActivity: AppCompatActivity(), View.OnClickListener {
         outState.putInt(year, datePicker.year)
         outState.putInt(month, datePicker.month)
         outState.putInt(dayOfMonth, datePicker.dayOfMonth)
+
+        //prevent negative value -> if (countOfVisits > 0)
+        if (countOfVisits > 0) countOfVisits--
     }
 
     companion object {

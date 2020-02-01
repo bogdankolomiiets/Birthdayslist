@@ -39,7 +39,7 @@
         <activity
             android:name=".views.NotificationDetail"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".views.SettingsActivity" android:parentActivityName=".views.MainActivity"
@@ -51,11 +51,13 @@
             android:exported="false"
             android:label="@string/service_name" />
 
-        <receiver android:name=".receivers.CelebrationReceiver">
+        <receiver android:name=".receivers.RebootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".receivers.AlarmReceiver" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

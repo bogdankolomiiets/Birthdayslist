@@ -12,7 +12,7 @@ import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.REMINDER_HOUR
 import com.bogdan.kolomiiets.birthdayreminder.Constants.Companion.REMINDER_MINUTE
 import com.bogdan.kolomiiets.birthdayreminder.utils.setEveryDayAlarm
 
-class CelebrationReceiver : BroadcastReceiver() {
+class RebootReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         if (Intent.ACTION_BOOT_COMPLETED == intent.action) {

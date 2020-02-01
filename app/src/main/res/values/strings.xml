@@ -29,8 +29,6 @@
     <string name="remind_the_day_before">remind the day before</string>
     <string name="remind_2_days_before">remind 2 days before</string>
     <string name="reminder_time">Reminder time:</string>
-    <string name="call">CALL</string>
-    <string name="sms">SEND SMS</string>
     <string name="search">Search</string>
     <string name="export_to_file">Export to file</string>
     <string name="import_into_database">Import into database</string>
@@ -46,4 +44,7 @@
     <string name="select_a_file_for_import">Select a file for import</string>
     <string name="nothing_to_import">Nothing to import</string>
     <string name="enter_name">Enter name</string>
+    <string name="call_button" translatable="false">call button</string>
+    <string name="sms_button" translatable="false">sms button</string>
+    <string name="close_button" translatable="false">close button</string>
 </resources>

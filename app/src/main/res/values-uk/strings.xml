@@ -24,14 +24,12 @@
     <string name="remind_the_day_before">нагадати за день</string>
     <string name="remind_2_days_before">нагадати за 2 дні</string>
     <string name="reminder_time">Час нагадування:</string>
-    <string name="call">ЗАТЕЛЕФОНУВАТИ</string>
-    <string name="sms">ВІДПРАВИТИ SMS</string>
     <string name="search">Пошук</string>
     <string name="export_to_file">Експортувати в файл</string>
     <string name="import_into_database">Імпортувати до програми</string>
     <string name="saved">Зміни збережено</string>
     <string name="undefined">Не визначено</string>
-    <string name="no_events">Відсутні дані для відображення</string>
+    <string name="no_events">Події відсутні</string>
     <string name="age">Вік:</string>
     <string name="event_search_in_progress">Виконується пошук подій</string>
     <string name="external_storage_not_available">Зовнішній носій недоступний</string>

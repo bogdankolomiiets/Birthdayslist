@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/value_4dp"
+    android:padding="@dimen/value_16dp"
     tools:context=".views.NewOrUpdateEventActivity">
 
     <TextView
@@ -22,7 +22,7 @@
         android:id="@+id/radio_buttons_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/value_4dp"
+        android:layout_marginTop="@dimen/value_8dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/type_title">
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/pick_contact_background"
         android:contentDescription="@string/pick_contact_btn_description"
-        android:padding="@dimen/value_8dp"
+        android:padding="@dimen/value_16dp"
         android:src="@drawable/ic_account_search"
         app:layout_constraintEnd_toStartOf="@id/date_picker"
         app:layout_constraintTop_toBottomOf="@id/radio_buttons_container" />

@@ -51,31 +51,41 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/call_btn"
-            style="@style/ButtonsStyle"
+            style="@style/event_notification_buttons_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/call" />
+            android:contentDescription="@string/call_button"
+            android:src="@drawable/ic_call" />
 
-        <Button
+        <ImageButton
             android:id="@+id/sms_btn"
-            style="@style/ButtonsStyle"
+            style="@style/event_notification_buttons_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/value_8dp"
-            android:layout_marginEnd="@dimen/value_8dp"
-            android:layout_weight="1"
-            android:text="@string/sms" />
+            android:layout_margin="@dimen/value_32dp"
+            android:contentDescription="@string/sms_button"
+            android:src="@drawable/ic_sms" />
 
-        <Button
+        <ImageButton
             android:id="@+id/close_btn"
-            style="@style/ButtonsStyle"
+            style="@style/event_notification_buttons_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/close" />
+            android:contentDescription="@string/close_button"
+            android:src="@drawable/ic_close" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/single_close_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/pick_contact_background"
+        android:padding="@dimen/value_16dp"
+        android:text="@string/close"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/size_18sp" />
 
 </RelativeLayout>

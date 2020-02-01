@@ -24,13 +24,11 @@
     <string name="remind_2_days_before">напомнить за 2 дня</string>
     <string name="remind_on_same_day">напомнить в день события</string>
     <string name="reminder_time">Время напоминания:</string>
-    <string name="call">Позвонить</string>
-    <string name="sms">СМС</string>
     <string name="search">Поиск</string>
     <string name="export_to_file">Экспорт в файл</string>
     <string name="import_into_database">Импорт в базу</string>
     <string name="undefined">Не определено</string>
-    <string name="no_events">Нет данных для отображения</string>
+    <string name="no_events">Нет событий</string>
     <string name="age">Возраст:</string>
     <string name="saved">Изменения сохранены</string>
     <string name="select_a_file_for_import">Выберите файл для импорта</string>

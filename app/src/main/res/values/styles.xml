@@ -39,4 +39,9 @@
         <item name="android:textSize">@dimen/size_24sp</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
+
+    <style name="event_notification_buttons_style">
+        <item name="android:padding">@dimen/value_16dp</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
 </resources>

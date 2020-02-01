@@ -9,7 +9,7 @@ import com.bogdan.kolomiiets.birthdayreminder.database.DatabaseConstants.Compani
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = TABLE_NAME, indices = [Index(EVENT_NAME, unique = true)])
+@Entity(tableName = TABLE_NAME, indices = [Index(EVENT_NAME, unique = false)])
 data class Event(
         @PrimaryKey(autoGenerate = true)
         val _id: Int = 0,
